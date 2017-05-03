@@ -1,3 +1,32 @@
 page-home {
+  .home-header {
+    position: relative;
+    background: palette(blue); 
+    height: 200px;
+    text-align: center;
+  }
 
+  .home-header-title {
+    @include center(xy);
+    color: white;
+  }
+
+  .level-card-container {
+    display: flex;
+    flex-flow: row wrap;   
+  }
+
+  .level-card {
+    text-align: center;
+    flex-basis: calc(50% - calc(#{$padding} * 2));
+    margin-top: $padding;
+
+    @include MQ(M) {
+      flex-basis: calc(33.3% - calc(#{$padding} * 2));
+    }
+
+    @include MQ(L) {
+      flex-basis: calc(25% - calc(#{$padding} * 2));
+    }
+  }
 }

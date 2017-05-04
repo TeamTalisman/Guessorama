@@ -35,8 +35,8 @@
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
-    "cordova-plugin-console",
     "cordova-plugin-statusbar",
+    "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard"

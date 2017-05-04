@@ -1,20 +1,13 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>Guessorama</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <h3>Guessorama</h3>
-  <p>
-    Look at the List component files so you can get an idea of what to do. We basicaly want to push to the game page (that way we don't show menu).
-  </p>
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-</ion-content>
+<ion-view title="Home" hide-nav-bar="true" style="background-color:#253ACE;">
+	<ion-content padding="true" class="manual-ios-statusbar-padding">
+		<div>
+			<img src="../../assets/icon/guessoramatitle.png" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
+		</div>
+		<div class="spacer" style="height: 50px;"></div>
+		<div class="button-bar">
+			<a ui-sref="../list/list.html" class="button button-light  button-block button-outline">Level 1</a>
+			<button class="button button-light  button-block button-outline">Level 2</button>
+			<button class="button button-light  button-block button-outline">Level 3</button>
+		</div>
+	</ion-content>
+</ion-view>

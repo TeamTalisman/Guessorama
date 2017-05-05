@@ -25,6 +25,7 @@ export class HomePage {
   constructor( private http: Http, public navCtrl: NavController, public toastCtrl: ToastController) {
     this.levels = [];
 
+    // Make four levels
     for (let i = 0; i < 4; i++) {
       this.levels.push({
         id: i,
@@ -36,6 +37,10 @@ export class HomePage {
     this.getData();
   }
 
+  /**
+   * getData - gets JSON data containing our prompts
+   * 
+   */
   getData() {
     const url = 'assets/data/data.json';
     this.http.get(url)
@@ -45,6 +50,12 @@ export class HomePage {
     });
   }
 
+  /**
+   * levelTapped - Get's a random prompt and sends it to the GuessPage as a param
+   * 
+   * @param {Object} event
+   * @param {Object} level
+   */
   levelTapped(event, level) {
     if (this.remainingPrompts.length > 0) {
       const randomIndex = Math.floor(Math.random() * this.remainingPrompts.length);
@@ -55,9 +66,16 @@ export class HomePage {
     } else {
       this.presentToast('No prompts left!', 3000, 'top', false);
     }
-
   }
 
+  /**
+   * presentToast - Presents toast
+   * 
+   * @param {String} message
+   * @param {Number} duration
+   * @param {String} position
+   * @param {Boolean} interactive
+   */
   presentToast(message, duration, position, interactive) {
     let toast = this.toastCtrl.create({
       message: message,

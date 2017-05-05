@@ -35428,6 +35428,12 @@ page-guess .prompt-header-text {
 
 page-guess .response-card {
   text-align: center;
+  text-transform: capitalize;
+}
+
+page-guess .response-card.guessed {
+  background: #22C7A9;
+  color: #f4f4f4;
 }
 
 page-home .home-header {

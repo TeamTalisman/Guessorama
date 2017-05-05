@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -5,7 +6,7 @@
     </button>
   </ion-navbar>
 </ion-header>
-
+<!-- Content -->
 <ion-content padding>
     <header>
      <ion-card>
@@ -14,24 +15,28 @@
           <h1 *ngIf='textPrompt' class='prompt-header-text'>
             {{ prompt.prompt }}
           </h1>
-
           <!-- If image prompt show this -->
           <img *ngIf='imgPrompt' src={{prompt.text}} />
         </ion-card-header>
      </ion-card>
     </header>
     <section>
+      <ion-item>
+        <ion-label floating>
+          Guess
+        </ion-label>
+        <ion-input type='text' (input)='textEntered($event)' clearInput></ion-input>
+      </ion-item>
       <ion-list>
-        <ion-item>
-          <ion-label floating>
-            Guess
-          </ion-label>
-          <ion-input type='text' (input)='textEntered($event)' clearInput></ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-card *ngFor='let response of prompt.responses' class='response-card'>
-          <ion-card-content>
+        <ion-card *ngFor='let response of responses; let i = index;' class='response-card' [ngClass]="(response.guessed) ? 'guessed' : '' ">
+          <!-- If this response has not been guessed -->
+          <ion-card-content *ngIf='!response.guessed'>
+            <!-- Show the points the response will award -->
+            {{ response.points }}
+          </ion-card-content>
+          <!-- Else If this response has been guessed -->
+          <ion-card-content *ngIf='response.guessed'>
+            <!-- Show the actual response -->
             {{ response.response }}
           </ion-card-content>
         </ion-card>

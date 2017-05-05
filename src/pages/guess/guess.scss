@@ -6,5 +6,11 @@ page-guess {
 
   .response-card {
     text-align: center;
+    text-transform: capitalize;
+
+    &.guessed {
+      background: map-get($colors, green);
+      color:  map-get($colors, light);
+    }
   }
 }

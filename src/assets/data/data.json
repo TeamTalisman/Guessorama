@@ -17,12 +17,6 @@
           "partialResponse": "Ch r z rd"
         },
         {
-          "points": 30,
-          "hint": "Yellow Mouse",
-          "response": "pikachu",
-          "partialResponse": "P ka hu"
-        },
-        {
           "points": 20,
           "hint": "Has an annoying grandson",
           "response": "professor oak",
@@ -33,6 +27,12 @@
           "hint": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments",
           "response": "mewtwo",
           "partialResponse": "M w w "
+        },
+        {
+          "points": 30,
+          "hint": "Yellow Mouse",
+          "response": "pikachu",
+          "partialResponse": "P ka hu"
         }
       ]
     },
@@ -53,12 +53,6 @@
           "partialResponse": "L i i"
         },
         {
-          "points": 30,
-          "hint": "Friendly Dinosaur",
-          "response": "yoshi",
-          "partialResponse": "Y s i"
-        },
-        {
           "points": 20,
           "hint": "Princess of Mushroom Kingdom",
           "response": "peach",
@@ -69,6 +63,12 @@
           "hint": "Kidnaps the princess",
           "response": "bowser",
           "partialResponse": "B ws r"
+        },
+        {
+          "points": 30,
+          "hint": "Friendly Dinosaur",
+          "response": "yoshi",
+          "partialResponse": "Y s i"
         }
       ]
     },
@@ -89,12 +89,6 @@
           "partialResponse": "s l "
         },
         {
-          "points": 30,
-          "hint": "Covers racer's screen in black bloopingness so they can't see",
-          "response": "blooper",
-          "partialResponse": " l o er"
-        },
-        {
           "points": 20,
           "hint": "Blows up!",
           "response": "bob-omb",
@@ -105,6 +99,12 @@
           "hint": "Boosts racer while knocking others of the track",
           "response": "bullet bill",
           "partialResponse": "b ll t b ll"
+        },
+        {
+          "points": 30,
+          "hint": "Covers racer's screen in black bloopingness so they can't see",
+          "response": "blooper",
+          "partialResponse": " l o er"
         }
       ]
     }

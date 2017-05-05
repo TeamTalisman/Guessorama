@@ -1,7 +1,7 @@
 page-home {
   .home-header {
     position: relative;
-    background: map-get($colors, blue);
+    background: map-get($colors, red);
     height: 200px;
     text-align: center;
   }
@@ -13,20 +13,21 @@ page-home {
 
   .level-card-container {
     display: flex;
-    flex-flow: row wrap;   
+    flex-flow: row wrap;
+    justify-content: center;
   }
 
   .level-card {
     text-align: center;
-    flex-basis: calc(50% - calc(#{$padding} * 2));
+    flex-basis: calc(50% - calc(#{$padding} * 3));
     margin-top: $padding;
 
     @include MQ(M) {
-      flex-basis: calc(33.3% - calc(#{$padding} * 2));
+      flex-basis: calc(33.3% - calc(#{$padding} * 4));
     }
 
     @include MQ(L) {
-      flex-basis: calc(25% - calc(#{$padding} * 2));
+      flex-basis: calc(25% - calc(#{$padding} * 5));
     }
   }
 }

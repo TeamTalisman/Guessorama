@@ -35422,9 +35422,17 @@ ion-navbar.toolbar {
   }
 }
 
+page-guess .prompt-header-text {
+  text-align: center;
+}
+
+page-guess .response-card {
+  text-align: center;
+}
+
 page-home .home-header {
   position: relative;
-  background: #44679F;
+  background: #FF4545;
   height: 200px;
   text-align: center;
 }
@@ -35447,28 +35455,31 @@ page-home .level-card-container {
   -webkit-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 page-home .level-card {
   text-align: center;
-  -webkit-flex-basis: calc(50% - calc(10px * 2));
-  -ms-flex-preferred-size: calc(50% - calc(10px * 2));
-  flex-basis: calc(50% - calc(10px * 2));
+  -webkit-flex-basis: calc(50% - calc(10px * 3));
+  -ms-flex-preferred-size: calc(50% - calc(10px * 3));
+  flex-basis: calc(50% - calc(10px * 3));
   margin-top: 10px;
 }
 
 @media only screen and (min-width: 760px) {
   page-home .level-card {
-    -webkit-flex-basis: calc(33.3% - calc(10px * 2));
-    -ms-flex-preferred-size: calc(33.3% - calc(10px * 2));
-    flex-basis: calc(33.3% - calc(10px * 2));
+    -webkit-flex-basis: calc(33.3% - calc(10px * 4));
+    -ms-flex-preferred-size: calc(33.3% - calc(10px * 4));
+    flex-basis: calc(33.3% - calc(10px * 4));
   }
 }
 
 @media only screen and (min-width: 1170px) {
   page-home .level-card {
-    -webkit-flex-basis: calc(25% - calc(10px * 2));
-    -ms-flex-preferred-size: calc(25% - calc(10px * 2));
-    flex-basis: calc(25% - calc(10px * 2));
+    -webkit-flex-basis: calc(25% - calc(10px * 5));
+    -ms-flex-preferred-size: calc(25% - calc(10px * 5));
+    flex-basis: calc(25% - calc(10px * 5));
   }
 }

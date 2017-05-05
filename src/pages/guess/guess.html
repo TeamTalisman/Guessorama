@@ -6,8 +6,36 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
     <header>
-      <p>Card goes here</p>
+     <ion-card>
+        <ion-card-header class='prompt-header'>
+          <!-- If Text prompt show this -->
+          <h1 *ngIf='textPrompt' class='prompt-header-text'>
+            {{ prompt.prompt }}
+          </h1>
+
+          <!-- If image prompt show this -->
+          <img *ngIf='imgPrompt' src={{prompt.text}} />
+        </ion-card-header>
+     </ion-card>
     </header>
+    <section>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>
+            Guess
+          </ion-label>
+          <ion-input type='text' (input)='textEntered($event)' clearInput></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-card *ngFor='let response of prompt.responses' class='response-card'>
+          <ion-card-content>
+            {{ response.response }}
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </section>
+
 </ion-content>

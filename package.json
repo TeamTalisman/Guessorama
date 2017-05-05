@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
+  "name": "guess-o-rama",
   "version": "0.0.0",
-  "author": "Ionic Framework",
+  "author": "Erick Sauri",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { GuessPage } from '../guess/guess';
 
 @Component({
   selector: 'page-home',
@@ -23,7 +24,7 @@ export class HomePage {
   }
 
   levelTapped(event, level) {
-    // this.navCtrl.push(NAME_OF_PAGE, {NAV PARAMS});
+    this.navCtrl.push(GuessPage, {item: level});
     this.presentToast(level.title + ' was tapped!', 3000, 'top', false);
   }
 

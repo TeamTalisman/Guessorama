@@ -32,11 +32,7 @@ $colors: (
   green:    #22C7A9,
   yellow:   #FCCF4D,
   red:      #FF4545,
-  blue: (
-    base: #44679F,
-        // light:  rgb(51,46,140),
-        // dark:   rgb(40,38,65)
-  ),
+  blue:     #44679F,
 );
 
 $palettes: (
@@ -45,13 +41,10 @@ $palettes: (
         light:  rgb(51,46,140),
         dark:   rgb(40,38,65)
     ),
-    blue: (
-      
-    )
 );
 
 @function palette($palette, $tone: 'base') {
-    @return map-get(map-get($colors, $palette), $tone);
+    @return map-get(map-get($palettes, $palette), $tone);
 }
 
 // App iOS Variables

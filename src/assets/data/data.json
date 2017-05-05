@@ -1,0 +1,112 @@
+{
+  "prompts": [
+    {
+      "type": "text",
+      "prompt": "Pokémon Red & Blue",
+      "responses": [
+        {
+          "points": 15,
+          "hint": "Used to capture Pokémon",
+          "response": "pokeball",
+          "partialResponse": "p ke b ll"
+        },
+        {
+          "points": 15,
+          "hint": "Fire lizard with wing",
+          "response": "charizard",
+          "partialResponse": "Ch r z rd"
+        },
+        {
+          "points": 20,
+          "hint": "Has an annoying grandson",
+          "response": "professor oak",
+          "partialResponse": "P of s or O k"
+        },
+        {
+          "points": 20,
+          "hint": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments",
+          "response": "mewtwo",
+          "partialResponse": "M w w "
+        },
+        {
+          "points": 30,
+          "hint": "Yellow Mouse",
+          "response": "pikachu",
+          "partialResponse": "P ka hu"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "prompt": "Super Mario Bros Characters",
+      "responses": [
+        {
+          "points": 15,
+          "hint": "The red plumber",
+          "response": "mario",
+          "partialResponse": "M r o"
+        },
+        {
+          "points": 15,
+          "hint": "Green plumber",
+          "response": "luigi",
+          "partialResponse": "L i i"
+        },
+        {
+          "points": 20,
+          "hint": "Princess of Mushroom Kingdom",
+          "response": "peach",
+          "partialResponse": "P a h"
+        },
+        {
+          "points": 20,
+          "hint": "Kidnaps the princess",
+          "response": "bowser",
+          "partialResponse": "B ws r"
+        },
+        {
+          "points": 30,
+          "hint": "Friendly Dinosaur",
+          "response": "yoshi",
+          "partialResponse": "Y s i"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "prompt": "Mario Kart Items",
+      "responses": [
+        {
+          "points": 15,
+          "hint": "Makes racers trip",
+          "response": "banana",
+          "partialResponse": " a a a"
+        },
+        {
+          "points": 15,
+          "hint": "Comes in three different colors which racer can throw at others",
+          "response": "shell",
+          "partialResponse": "s l "
+        },
+        {
+          "points": 20,
+          "hint": "Blows up!",
+          "response": "bob-omb",
+          "partialResponse": "b b- mb"
+        },
+        {
+          "points": 20,
+          "hint": "Boosts racer while knocking others of the track",
+          "response": "bullet bill",
+          "partialResponse": "b ll t b ll"
+        },
+        {
+          "points": 30,
+          "hint": "Covers racer's screen in black bloopingness so they can't see",
+          "response": "blooper",
+          "partialResponse": " l o er"
+        }
+      ]
+    }
+  ]
+}

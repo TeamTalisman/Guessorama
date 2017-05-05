@@ -1,0 +1,16 @@
+page-guess { 
+  // .prompt-header { }
+  .prompt-header-text {
+    text-align: center;
+   }
+
+  .response-card {
+    text-align: center;
+    text-transform: capitalize;
+
+    &.guessed {
+      background: map-get($colors, green);
+      color:  map-get($colors, light);
+    }
+  }
+}

@@ -21,7 +21,8 @@ export class GuessPage {
   levelCompleted: Boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
-    smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
+    smartAudio.preload('correctPing', '../assets/audio/correct.mp3');
+    smartAudio.preload('wrongPing', '../assets/audio/incorrect.wav');
 
     // Preload audio assets
     
@@ -86,6 +87,8 @@ export class GuessPage {
 
         this.checkIfLevelIsCompleted();
       } else {
+        // Play sound
+        this.smartAudio.play('wrongPing');
         // Present toast to alert user the answer was incorrect
         this.presentToast('Wrong Answer! Try again.', 3000, 'bottom', true); 
       }
@@ -111,7 +114,6 @@ export class GuessPage {
       }
     });
 
-    console.log('Is level finished ' + isLevelFinished);
     if (isLevelFinished) {
       this.presentAlert(alertProps.title, alertProps.description, alertProps.buttons);
     }

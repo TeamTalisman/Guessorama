@@ -17,7 +17,7 @@ export class SmartAudio {
     // Create audio object
     const audio = {
       key: key,
-      asset: (this.audioType === 'html5') ? 'html5' : 'native',
+      asset: (this.audioType === 'html5') ? asset : key,
       type: this.audioType
     };
 

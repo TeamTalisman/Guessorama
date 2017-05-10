@@ -7,40 +7,41 @@
   </ion-navbar>
 </ion-header>
 <!-- Content -->
-<ion-content padding>
+<ion-content>
+  <ion-list class='response-card-list'>
+    <ion-card *ngFor='let response of responses; let i = index;' class='response-card' [ngClass]="(response.guessed) ? 'guessed' : '' ">
+      <!-- If this response has not been guessed -->
+      <ion-card-content class='response-text' *ngIf='!response.guessed'>
+        <!-- Show the points the response will award -->
+        {{ response.points }}
+      </ion-card-content>
+      <!-- Else If this response has been guessed -->
+      <ion-card-content class='response-text' *ngIf='response.guessed'>
+        <!-- Show the actual response -->
+        {{ response.response }}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <article padding>
     <header>
-     <ion-card>
+      <ion-card>
         <ion-card-header class='prompt-header'>
           <!-- If Text prompt show this -->
-          <h1 *ngIf='textPrompt' class='prompt-header-text'>
+          <h2 *ngIf='textPrompt' class='prompt-header-text'>
             {{ prompt.prompt }}
-          </h1>
+          </h2>
           <!-- If image prompt show this -->
           <img *ngIf='imgPrompt' src={{prompt.text}} />
         </ion-card-header>
-     </ion-card>
+      </ion-card>
     </header>
     <section>
       <ion-item>
-        <ion-label floating>
-          Guess
+        <ion-label floating class='placeholder-label'>
+          Enter your guesses...
         </ion-label>
-        <ion-input type='text' (input)='textEntered($event)' clearInput></ion-input>
+        <ion-input type='text' (keypress)='textEntered($event)' clearInput></ion-input>
       </ion-item>
-      <ion-list>
-        <ion-card *ngFor='let response of responses; let i = index;' class='response-card' [ngClass]="(response.guessed) ? 'guessed' : '' ">
-          <!-- If this response has not been guessed -->
-          <ion-card-content *ngIf='!response.guessed'>
-            <!-- Show the points the response will award -->
-            {{ response.points }}
-          </ion-card-content>
-          <!-- Else If this response has been guessed -->
-          <ion-card-content *ngIf='response.guessed'>
-            <!-- Show the actual response -->
-            {{ response.response }}
-          </ion-card-content>
-        </ion-card>
-      </ion-list>
     </section>
-
+  </article>
 </ion-content>

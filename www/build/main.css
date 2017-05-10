@@ -54821,9 +54821,54 @@ page-guess .prompt-header-text {
   text-align: center;
 }
 
+page-guess .response-card-list {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background: grey;
+}
+
 page-guess .response-card {
   text-align: center;
   text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-flex-basis: 33.3%;
+  -ms-flex-preferred-size: 33.3%;
+  flex-basis: 33.3%;
+}
+
+page-guess .response-card:nth-of-type(4), page-guess .response-card:last-of-type {
+  -webkit-flex-basis: 50%;
+  -ms-flex-preferred-size: 50%;
+  flex-basis: 50%;
+}
+
+@media only screen and (min-width: 760px) {
+  page-guess .response-card {
+    -webkit-flex-basis: 20%;
+    -ms-flex-preferred-size: 20%;
+    flex-basis: 20%;
+  }
+  page-guess .response-card:nth-of-type(4), page-guess .response-card:last-of-type {
+    -webkit-flex-basis: 20%;
+    -ms-flex-preferred-size: 20%;
+    flex-basis: 20%;
+  }
 }
 
 page-guess .response-card.guessed {
@@ -54905,7 +54950,6 @@ page-home .level-card {
   -webkit-flex-basis: calc(50% - calc(10px * 3));
   -ms-flex-preferred-size: calc(50% - calc(10px * 3));
   flex-basis: calc(50% - calc(10px * 3));
-  padding: calc(10px * 3);
   margin-top: 10px;
   font-family: Pseudonumb;
   text-transform: uppercase;

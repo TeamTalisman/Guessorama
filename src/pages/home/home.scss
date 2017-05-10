@@ -55,7 +55,7 @@ page-home {
     color: map-get($colors, brown);;
     background: map-get($colors, orange);
     flex-basis: calc(50% - calc(#{$padding} * 3));
-    padding: calc(#{$padding} * 3);
+    // padding: calc(#{$padding} * 3);
     margin-top: $padding;
     font-family: Pseudonumb;
     text-transform: uppercase;

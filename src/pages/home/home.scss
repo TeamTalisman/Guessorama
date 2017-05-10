@@ -1,79 +1,64 @@
 page-home {
-   @font-face {
-    font-family: 'bludhaven';
-    src: url('../../assets/fonts/BLUDHAVEN.ttf') format('truetype');
-}
-   @font-face {
-    font-family: 'Pseudonumb';
-    src: url('../../assets/fonts/Pseudonumb.otf') format('opentype');
-}
-  .home-header {
-    position: relative;
-    height: 200px;
-    text-align: center;
-    
-
+  .home {
+    //background: map-get($colors, blue);
+    background-image: url('../../assets/backgrounds/Basic_Blue.jpg');
+    //background-image: url('../../assets/backgrounds/Pink_Stars.jpg');
+    background-image: url('../../assets/backgrounds/Sky_Stars.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
+  // Header
+  .home-header {
+    position: relative;
+    min-height: 150px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
 
+  .home-header-topbar {
+    padding: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .home-header-logo { 
+    padding: 1em;
+  }
 
   .home-header-title {
     @include center(xy);
     color: white;
-       
-
   }
-  
- .page{
-         //background: map-get($colors, blue);
-    background-image: url('../../assets/backgrounds/Basic_Blue.jpg');
-    //background-image: url('../../assets/backgrounds/Pink_Stars.jpg');
-    background-image: url('../../assets/backgrounds/Sky_Stars.jpg');
-          background-position: center; 
-          background-repeat: no-repeat;
-          background-size: 100% 100%;
-          }
 
  .points-icon{
-     position:absolute;
-     color: gold;
-     top: 0px;
-     right: 0px;
-     padding-right: 30px;
+    color: gold;
  }
 
  .points-number{
-     position:absolute;
      color: gold;
-     top: -13px;
-     right: 10px;
-     
  }
 
- .logo{
-     position:relative;
-     top: 0px;
-    
-     padding-top: 40px;
- }
-
+  // Levels
   .level-card-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    
+    padding-top: 2em;
   }
 
   .level-card {
     text-align: center;
-    font-size: 30px;
+    font-size: 2em;
     color: map-get($colors, brown);;
     background: map-get($colors, orange);
     flex-basis: calc(50% - calc(#{$padding} * 3));
+    // padding: calc(#{$padding} * 3);
     margin-top: $padding;
     font-family: Pseudonumb;
-    
-    
+    text-transform: uppercase;
 
     @include MQ(M) {
       flex-basis: calc(33.3% - calc(#{$padding} * 4));
@@ -83,5 +68,9 @@ page-home {
     @include MQ(L) {
       flex-basis: calc(25% - calc(#{$padding} * 5));
     }
+  }
+
+  .level-card-content {
+    font-size: 0.85em;
   }
 }

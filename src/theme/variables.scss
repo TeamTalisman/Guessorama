@@ -36,8 +36,8 @@ $colors: (
   gray:   #B2B2AD,
   orange: #FF8200,
   light_blue: #00D8FF,
-  purple: #6328FF,
-    brown: #663820,
+purple: #6328FF,
+brown: #663820,
 );
 
 $palettes: (
@@ -50,6 +50,16 @@ $palettes: (
 
 @function palette($palette, $tone: 'base') {
     @return map-get(map-get($palettes, $palette), $tone);
+}
+
+@font-face {
+    font-family: 'bludhaven';
+    src: url('../../assets/fonts/BLUDHAVEN.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Pseudonumb';
+    src: url('../../assets/fonts/Pseudonumb.otf') format('opentype');
 }
 
 // App iOS Variables

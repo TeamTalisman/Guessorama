@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController, ToastController } from 'ionic-angular';
+import { SmartAudio } from '../../providers/smart-audio'; 
 
 @Component({
   selector: 'page-guess',
@@ -19,7 +20,12 @@ export class GuessPage {
   responses: Array<{ points: Number, hint: String, response: String, partialResponse: String, guessed: Boolean }>
   levelCompleted: Boolean;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public toastCtrl: ToastController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+    smartAudio.preload('correctPing', '../assets/audio/correct.mp3');
+    smartAudio.preload('wrongPing', '../assets/audio/incorrect.wav');
+
+    // Preload audio assets
+    
     // Get the prompt from the parameters passed from home
     this.prompt = navParams.get('prompt');
 
@@ -47,31 +53,45 @@ export class GuessPage {
    * @param {Object} event
    */
   textEntered(event) {
-    // Create a variable for the correct response and set default value to -1 (incorrect)
-    let correctResponse = -1;
+    // Cache the keyCode we are looking for
+    const ENTER_KEY_CODE = 13;
 
-    // Get the input in lowercase
-    const input = event.target.value.toLowerCase();
+    // If key entered was for enter
+    if (event.which === ENTER_KEY_CODE) {
+      // Create a variable for the correct response and set default value to -1 (incorrect)
+      let correctResponse = -1;
 
-    // Loop through the responses
-    this.prompt.responses.forEach((response, index) => {
-      // If the input value is equal to the response we set correctResponse to index
-      correctResponse = (input == response.response) ? index : correctResponse;
-    });
+      // Get the input in lowercase
+      const input = event.target.value.toLowerCase();
 
-    // If the correctResponse is greater than 0
-    // it means we got a correct answer
-    if (correctResponse >= 0) {
-      // Set input to empty again
-      event.target.value = '';
+      // Loop through the responses
+      this.prompt.responses.forEach((response, index) => {
+        // If the input value is equal to the response we set correctResponse to index
+        correctResponse = (input == response.response) ? index : correctResponse;
+      });
 
-      // Set bool for class to true
-      this.responses[correctResponse].guessed = true;
+      // If the correctResponse is greater than 0
+      // it means we got a correct answer
+      if (correctResponse >= 0) {
+        // Set input to empty again
+        event.target.value = '';
 
-      // Present toast to alert user the answer was correct
-      this.presentToast('Correct Answer!', 3000, 'top', true);      
+        // Set bool for class to true
+        this.responses[correctResponse].guessed = true;
 
-      this.checkIfLevelIsCompleted();
+        // Play audio
+        this.smartAudio.play('correctPing');
+
+        // Present toast to alert user the answer was correct
+        this.presentToast('Correct Answer!', 3000, 'bottom', true);      
+
+        this.checkIfLevelIsCompleted();
+      } else {
+        // Play sound
+        this.smartAudio.play('wrongPing');
+        // Present toast to alert user the answer was incorrect
+        this.presentToast('Wrong Answer! Try again.', 3000, 'bottom', true); 
+      }
     }
   }
 
@@ -94,7 +114,6 @@ export class GuessPage {
       }
     });
 
-    console.log('Is level finished ' + isLevelFinished);
     if (isLevelFinished) {
       this.presentAlert(alertProps.title, alertProps.description, alertProps.buttons);
     }

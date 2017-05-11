@@ -21,8 +21,8 @@ export class GuessPage {
   levelCompleted: Boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
-    smartAudio.preload('correctPing', '../assets/audio/correct.mp3');
-    smartAudio.preload('wrongPing', '../assets/audio/incorrect.wav');
+    smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
+    smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
 
     // Preload audio assets
     

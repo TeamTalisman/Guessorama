@@ -17,7 +17,7 @@ export class SmartAudio {
     // Create audio object
     const audio = {
       key: key,
-      asset: (this.audioType === 'html5') ? asset : key,
+      asset: asset,
       type: this.audioType
     };
 
@@ -50,6 +50,9 @@ export class SmartAudio {
           console.log(res);
       }, (err) => {
           console.log(err);
+          let audioAsset = new Audio(audio.asset);
+          // Play audio asset
+          audioAsset.play();
       });
     }
   }

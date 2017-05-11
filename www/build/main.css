@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'bludhaven';
-  src: url("../../assets/fonts/BLUDHAVEN.ttf") format("truetype");
+  src: url("../assets/fonts/BLUDHAVEN.ttf") format("truetype");
 }
 
 @font-face {
   font-family: 'Pseudonumb';
-  src: url("../../assets/fonts/Pseudonumb.otf") format("opentype");
+  src: url("../assets/fonts/Pseudonumb.otf") format("opentype");
 }
 
 .ion-ios-add:before {
@@ -54877,8 +54877,8 @@ page-guess .response-card.guessed {
 }
 
 page-home .home {
-  background-image: url("../../assets/backgrounds/Basic_Blue.jpg");
-  background-image: url("../../assets/backgrounds/Sky_Stars.jpg");
+  background-image: url("../assets/backgrounds/Basic_Blue.jpg");
+  background-image: url("../assets/backgrounds/Sky_Stars.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

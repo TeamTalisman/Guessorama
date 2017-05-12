@@ -107,6 +107,43 @@
           "partialResponse": " l o er"
         }
       ]
+    }, 
+     {
+      "type": "image",
+      "prompt": "OW.png",
+      "responses": [
+        {
+          "points": 10,
+          "hint": "The ability to Teleport",
+          "response": "tracer",
+          "partialResponse": " T er"
+        },
+        {
+          "points": 15,
+          "hint": "Has a younger brother named Genji",
+          "response": "hanzo",
+          "partialResponse": "h o "
+        },
+        {
+          "points": 20,
+          "hint": "Former leader of Overwatch",
+          "response": "soldier 76",
+          "partialResponse": " s er 76"
+        },
+        {
+          "points": 20,
+          "hint": "Uses her staff to heal allies",
+          "response": "mercy",
+          "partialResponse": "m y"
+        },
+        {
+          "points": 30,
+          "hint": "Professional gamer and a mech pilot",
+          "response": "d.va",
+          "partialResponse": "d va"
+        }
+      ]
     }
+
   ]
 }

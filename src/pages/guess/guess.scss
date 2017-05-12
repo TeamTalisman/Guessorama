@@ -1,7 +1,28 @@
 page-guess { 
   // .prompt-header { }
+  .guess{
+      background-image: url('../assets/backgrounds/Sky_Stars.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+
+  .prompt-header{
+     
+    background: map-get($colors, orange);
+  }
+
+
+
   .prompt-header-text {
     text-align: center;
+    font-family: Pseudonumb;
+    text-transform: uppercase;
+    font-size: 1.20em;
+     color: map-get($colors, brown);;
+   
+
    }
 
   .response-card-list {
@@ -13,6 +34,7 @@ page-guess {
     padding: 0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     background: grey;
+  
   }
 
   .response-card {
@@ -23,24 +45,43 @@ page-guess {
     border-radius: 0;
     box-shadow: none;
     flex-basis: 33.3%;
-  
+    font-family: Pseudonumb;
+    text-transform: uppercase;
+     color: map-get($colors, brown);
+    background: map-get($colors, orange);
+    
+
     &:nth-of-type(4),
     &:last-of-type {
       flex-basis: 50%;
+       
+
     }
 
     @include MQ(M) {
       flex-basis: 20%;
 
+
+
       &:nth-of-type(4),
       &:last-of-type {
         flex-basis: 20%;
+
       }
     }
 
     &.guessed {
       background: map-get($colors, green);
       color:  map-get($colors, light);
+
+
     }
   }
+
+  .response-text{
+      font-size: 1.20em;
+
+  }
+
+
 }

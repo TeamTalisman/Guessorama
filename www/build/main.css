@@ -54817,8 +54817,23 @@ ion-navbar.toolbar {
   }
 }
 
+page-guess .guess {
+  background-image: url("../assets/backgrounds/Sky_Stars.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+page-guess .prompt-header {
+  background: #FF8200;
+}
+
 page-guess .prompt-header-text {
   text-align: center;
+  font-family: Pseudonumb;
+  text-transform: uppercase;
+  font-size: 1.20em;
+  color: #663820;
 }
 
 page-guess .response-card-list {
@@ -54850,6 +54865,10 @@ page-guess .response-card {
   -webkit-flex-basis: 33.3%;
   -ms-flex-preferred-size: 33.3%;
   flex-basis: 33.3%;
+  font-family: Pseudonumb;
+  text-transform: uppercase;
+  color: #663820;
+  background: #FF8200;
 }
 
 page-guess .response-card:nth-of-type(4), page-guess .response-card:last-of-type {
@@ -54876,8 +54895,11 @@ page-guess .response-card.guessed {
   color: #f4f4f4;
 }
 
+page-guess .response-text {
+  font-size: 1.20em;
+}
+
 page-home .home {
-  background-image: url("../assets/backgrounds/Basic_Blue.jpg");
   background-image: url("../assets/backgrounds/Sky_Stars.jpg");
   background-position: center;
   background-repeat: no-repeat;

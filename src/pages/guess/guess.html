@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 <!-- Content -->
-<ion-content>
+<ion-content class="guess">
   <ion-list class='response-card-list'>
     <ion-card *ngFor='let response of responses; let i = index;' class='response-card' [ngClass]="(response.guessed) ? 'guessed' : '' ">
       <!-- If this response has not been guessed -->
@@ -31,7 +31,7 @@
             {{ prompt.prompt }}
           </h2>
           <!-- If image prompt show this -->
-          <img *ngIf='imgPrompt' src={{prompt.text}} />
+          <img *ngIf='imgPrompt' src="../assets/img/prompts/{{prompt.prompt}}" />
         </ion-card-header>
       </ion-card>
     </header>

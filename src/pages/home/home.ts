@@ -6,6 +6,7 @@ import { GuessPage } from '../guess/guess';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
+import { Prompts } from '../../providers/prompts';
 
 @Injectable()
 @Component({
@@ -13,40 +14,24 @@ import 'rxjs/Rx';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  // Holds every prompt
-  prompts = [];
-
-  // Holds prompts not yet completed
-  remainingPrompts = [];
-
   selectedLevel: any;
-  levels: Array<{ id: Number, title: string }>
+  levels: Array<{ id: Number, title: string, promptId: Number, completed: Boolean }>
 
-  constructor( private http: Http, public navCtrl: NavController, public toastCtrl: ToastController) {
+  constructor(public promptsService: Prompts, private http: Http, public navCtrl: NavController, public toastCtrl: ToastController) {
     this.levels = [];
-
-    // Make four levels
-    for (let i = 0; i < 4; i++) {
-      this.levels.push({
-        id: i,
-        title: 'Level ' + (i + 1),
-      });
-    }
-
-    // Load JSON data
-    this.getData();
   }
 
-  /**
-   * getData - gets JSON data containing our prompts
-   * 
-   */
-  getData() {
-    const url = 'assets/data/data.json';
-    this.http.get(url)
-      .subscribe((res) => {
-        this.prompts = res.json().prompts
-        this.remainingPrompts = this.prompts;
+  ionViewDidLoad() {
+    this.promptsService.loadData();
+    this.promptsService.prompt.subscribe((prompts) => {
+      prompts.forEach((prompt, index) => {
+        this.levels.push({
+          id: index,
+          title: 'Level ' + (index + 1),
+          promptId: prompt.id,
+          completed: false,
+        });
+      });
     });
   }
 
@@ -57,14 +42,12 @@ export class HomePage {
    * @param {Object} level
    */
   levelTapped(event, level) {
-    if (this.remainingPrompts.length > 0) {
-      const randomIndex = Math.floor(Math.random() * this.remainingPrompts.length);
-      const currentPrompt = this.remainingPrompts[randomIndex];
-      // For test purposes let us not remove prompts
-      // this.remainingPrompts.splice(randomIndex, 1);
-      this.navCtrl.push(GuessPage, { prompt: currentPrompt });
+    if (level.completed) {
+      this.presentToast('You have already completed that level', 3000, 'top', false);
     } else {
-      this.presentToast('No prompts left!', 3000, 'top', false);
+      const newLevel = this.promptsService.prompts[level.promptId];
+      level.completed = true;
+      this.navCtrl.push(GuessPage, { prompt: newLevel });
     }
   }
 

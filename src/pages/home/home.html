@@ -16,7 +16,11 @@
   </header>
   <!-- Level cards -->
   <ion-list class='level-card-container'>
-      <ion-card class='level-card' *ngFor='let level of levels' (click)='levelTapped($event, level)'>
+      <ion-card class='level-card'
+        *ngFor='let level of levels'
+        [ngClass]="(level.completed) ? 'disabled' : ''"
+        (click)='levelTapped($event, level)'
+      >
         <ion-card-content class='level-card-content'>
           {{ level.title }}
         </ion-card-content>

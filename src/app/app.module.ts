@@ -9,9 +9,11 @@ import { ListPage } from '../pages/list/list';
 import { GuessPage } from '../pages/guess/guess';
 
 import { StatusBar } from '@ionic-native/status-bar';
+import { NativeAudio } from '@ionic-native/native-audio';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SmartAudio } from '../providers/smart-audio';
-import { NativeAudio } from '@ionic-native/native-audio';
+import { Prompts } from '../providers/prompts';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
     SplashScreen,
     SmartAudio,
     NativeAudio,
+    Prompts,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

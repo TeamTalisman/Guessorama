@@ -54977,6 +54977,12 @@ page-home .level-card {
   text-transform: uppercase;
 }
 
+page-home .level-card.disabled {
+  background: #B2B2AD;
+  color: #FF8200;
+  cursor: not-allowed;
+}
+
 @media only screen and (min-width: 760px) {
   page-home .level-card {
     -webkit-flex-basis: calc(33.3% - calc(10px * 4));

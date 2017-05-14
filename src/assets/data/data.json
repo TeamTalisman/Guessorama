@@ -1,6 +1,7 @@
 {
   "prompts": [
     {
+      "id": 0,
       "type": "text",
       "prompt": "Pokémon Red & Blue",
       "responses": [
@@ -37,6 +38,7 @@
       ]
     },
     {
+      "id": 1,
       "type": "text",
       "prompt": "Super Mario Bros Characters",
       "responses": [
@@ -73,6 +75,7 @@
       ]
     },
     {
+      "id": 2,
       "type": "text",
       "prompt": "Mario Kart Items",
       "responses": [
@@ -109,8 +112,9 @@
       ]
     }, 
      {
+      "id": 3,
       "type": "image",
-      "prompt": "OW.png",
+      "prompt": "overwatch.png",
       "responses": [
         {
           "points": 10,
@@ -144,6 +148,5 @@
         }
       ]
     }
-
   ]
 }

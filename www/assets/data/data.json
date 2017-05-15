@@ -4,35 +4,41 @@
       "id": 0,
       "type": "text",
       "prompt": "Pokémon Red & Blue",
+      "completed": false,
       "responses": [
         {
           "points": 15,
           "hint": "Used to capture Pokémon",
           "response": "pokeball",
+          "guessed": false,
           "partialResponse": "p ke b ll"
-        },
+          },
         {
           "points": 15,
           "hint": "Fire lizard with wing",
           "response": "charizard",
+          "guessed": false,
           "partialResponse": "Ch r z rd"
         },
         {
           "points": 20,
           "hint": "Has an annoying grandson",
           "response": "professor oak",
+          "guessed": false,
           "partialResponse": "P of s or O k"
         },
         {
           "points": 20,
           "hint": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments",
           "response": "mewtwo",
+          "guessed": false,
           "partialResponse": "M w w "
         },
         {
           "points": 30,
           "hint": "Yellow Mouse",
           "response": "pikachu",
+          "guessed": false,
           "partialResponse": "P ka hu"
         }
       ]
@@ -41,35 +47,41 @@
       "id": 1,
       "type": "text",
       "prompt": "Super Mario Bros Characters",
+      "completed": false,
       "responses": [
         {
           "points": 15,
           "hint": "The red plumber",
           "response": "mario",
+          "guessed": false,
           "partialResponse": "M r o"
         },
         {
           "points": 15,
           "hint": "Green plumber",
           "response": "luigi",
+          "guessed": false,
           "partialResponse": "L i i"
         },
         {
           "points": 20,
           "hint": "Princess of Mushroom Kingdom",
           "response": "peach",
+          "guessed": false,
           "partialResponse": "P a h"
         },
         {
           "points": 20,
           "hint": "Kidnaps the princess",
           "response": "bowser",
+          "guessed": false,
           "partialResponse": "B ws r"
         },
         {
           "points": 30,
           "hint": "Friendly Dinosaur",
           "response": "yoshi",
+          "guessed": false,
           "partialResponse": "Y s i"
         }
       ]
@@ -78,73 +90,235 @@
       "id": 2,
       "type": "text",
       "prompt": "Mario Kart Items",
+      "completed": false,
       "responses": [
         {
           "points": 15,
           "hint": "Makes racers trip",
           "response": "banana",
+          "guessed": false,
           "partialResponse": " a a a"
         },
         {
           "points": 15,
           "hint": "Comes in three different colors which racer can throw at others",
           "response": "shell",
+          "guessed": false,
           "partialResponse": "s l "
         },
         {
           "points": 20,
           "hint": "Blows up!",
           "response": "bob-omb",
+          "guessed": false,
           "partialResponse": "b b- mb"
         },
         {
           "points": 20,
           "hint": "Boosts racer while knocking others of the track",
           "response": "bullet bill",
+          "guessed": false,
           "partialResponse": "b ll t b ll"
         },
         {
           "points": 30,
           "hint": "Covers racer's screen in black bloopingness so they can't see",
           "response": "blooper",
+          "guessed": false,
           "partialResponse": " l o er"
         }
       ]
-    }, 
-     {
+    },
+    {
       "id": 3,
       "type": "image",
       "prompt": "overwatch.png",
+      "completed": false,
       "responses": [
         {
           "points": 10,
           "hint": "The ability to Teleport",
           "response": "tracer",
+          "guessed": false,
           "partialResponse": " T er"
         },
         {
           "points": 15,
           "hint": "Has a younger brother named Genji",
           "response": "hanzo",
+          "guessed": false,
           "partialResponse": "h o "
         },
         {
           "points": 20,
           "hint": "Former leader of Overwatch",
           "response": "soldier 76",
+          "guessed": false,
           "partialResponse": " s er 76"
         },
         {
           "points": 20,
           "hint": "Uses her staff to heal allies",
           "response": "mercy",
+          "guessed": false,
           "partialResponse": "m y"
         },
         {
           "points": 30,
           "hint": "Professional gamer and a mech pilot",
           "response": "d.va",
+          "guessed": false,
           "partialResponse": "d va"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "image",
+      "prompt": "org_13.png",
+      "completed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "Sora's nobody",
+          "response": "roxas",
+          "guessed": false,
+          "partialResponse": "r as"
+        },
+        {
+          "points": 15,
+          "hint": "Uses the power of fire",
+          "response": "axel",
+          "guessed": false,
+          "partialResponse": "a el "
+        },
+        {
+          "points": 20,
+          "hint": "Uses the power of water",
+          "response": "demyx",
+          "guessed": false,
+          "partialResponse": "d yx"
+        },
+        {
+          "points": 20,
+          "hint": "axel's former friend",
+          "response": "saix",
+          "guessed": false,
+          "partialResponse": "s ix"
+        },
+        {
+          "points": 20,
+          "hint": "Leader of the organization",
+          "response": "xemnas",
+          "guessed": false,
+          "partialResponse": "s ix"
+        },
+        {
+          "points": 30,
+          "hint": "Led the rebellion within the organization",
+          "response": "marluxia",
+          "guessed": false,
+          "partialResponse": "m xia "
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "image",
+      "prompt": "mass_effect_race.png",
+      "completed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "A race of blue asexuals. powerful in biotics",
+          "response": "asari",
+          "guessed": false,
+          "partialResponse": "a ri"
+        },
+        {
+          "points": 15,
+          "hint": "A race of hypermetabolic humanoids",
+          "response": "Salarian",
+          "guessed": false,
+          "partialResponse": "s l rian"
+        },
+        {
+          "points": 20,
+          "hint": "A race of humanoids comparible in size to humans",
+          "response": "turian",
+          "guessed": false,
+          "partialResponse": "t ian"
+        },
+        {
+          "points": 20,
+          "hint": "A race of blood thirsty dinosaur-like humanoids",
+          "response": "krogan",
+          "guessed": false,
+          "partialResponse": "s ix"
+        },
+        {
+          "points": 20,
+          "hint": "A species with an extremely weak immune system and must wear protective suits.",
+          "response": "quarian",
+          "guessed": false,
+          "partialResponse": "qu rian"
+        },
+        {
+          "points": 30,
+          "hint": "Race of synthetic machines with a connected AI network",
+          "response": "geth",
+          "guessed": false,
+          "partialResponse": "g th "
+        }
+      ]
+    },
+     {
+      "id": 3,
+      "type": "text",
+      "prompt": "Best-Selling Video Game Franchises",
+      "completed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "The official mascot of Nintendo",
+          "response": "mario",
+          "guessed": false,
+          "partialResponse": "m rio"
+        },
+        {
+          "points": 15,
+          "hint": " A falling-blocks puzzle video game",
+          "response": "tetris",
+          "guessed": false,
+          "partialResponse": "s l rian"
+        },
+        {
+          "points": 20,
+          "hint": "A series of strategic life simulation",
+          "response": "sims",
+          "guessed": false,
+          "partialResponse": "s ms"
+        },
+        {
+          "points": 20,
+          "hint": "A role-playing video game for the Game Boy",
+          "response": "pokemon",
+          "guessed": false,
+          "partialResponse": "p mon"
+        },
+         {
+           "points": 20,
+          "hint": "An open world action-adventure video game series created by David Jones",
+          "response": "grand theft auto",
+          "guessed": false,
+          "partialResponse": "gra the aut"
+        },
+        {
+          "points": 30,
+          "hint": "A first-person shooter video game series",
+          "response": "call of duty",
+          "guessed": false,
+          "partialResponse": "c of d"
         }
       ]
     }

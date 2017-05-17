@@ -26,11 +26,13 @@ export class GuessPage {
   timer: any;
   timerRunning: boolean;
   hint: string;
+  evenResponses: boolean;
 
   constructor(public player: Player, public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {    
     // Get the prompt from the parameters passed from home
     this.prompt = navParams.get('prompt');
     this.title = navParams.get('level').title;
+    this.evenResponses = this.prompt.responses.length % 2 === 0;
   }
 
   ionViewDidLoad() {

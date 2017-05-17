@@ -78,10 +78,16 @@ page-guess {
     text-transform: uppercase;
     color: map-get($colors, blue);
     background: map-get($colors, orange);
-    
-    &:nth-of-type(4),
-    &:last-of-type {
-      flex-basis: 50%;
+
+    .even {
+      background: green;
+    }
+
+    &:not(.even) {
+      &:nth-of-type(4),
+      &:last-of-type {
+        flex-basis: 50%;
+      }
     }
 
     @include MQ(M) {
@@ -100,5 +106,7 @@ page-guess {
 
   .response-text{
       font-size: 1.20em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
   }
 }

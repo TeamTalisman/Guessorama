@@ -27,7 +27,7 @@
   <ion-list class='level-card-container'>
       <ion-card class='level-card'
         *ngFor='let level of levels'
-        [ngClass]="(level.completed) ? 'disabled' : ''"
+        [ngClass]='{ disabled: level.completed }'
         (click)='levelTapped($event, level)'
       >
         <ion-card-content class='level-card-content'>

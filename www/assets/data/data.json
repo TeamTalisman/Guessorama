@@ -173,7 +173,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 4,
       "type": "image",
       "prompt": "org_13.png",
       "completed": false,
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 5,
       "type": "image",
       "prompt": "mass_effect_race.png",
       "completed": false,
@@ -273,7 +273,7 @@
       ]
     },
      {
-      "id": 3,
+      "id": 6,
       "type": "text",
       "prompt": "Best-Selling Video Game Franchises",
       "completed": false,

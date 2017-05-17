@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController, ToastController } from 'ionic-angular';
 import { SmartAudio } from '../../providers/smart-audio'; 
+import { Player } from '../../providers/player';
 
 @Component({
   selector: 'page-guess',
@@ -19,12 +20,17 @@ export class GuessPage {
   imgPrompt = false;
   audioPrompt = false;
   levelCompleted: Boolean;
+  timerDuration = 25000;
+  timer: any;
+  timerRunning: boolean;
+  hint: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+  constructor(public player: Player, public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+    // Preload audio assets
+    smartAudio.preload('timer', 'assets/audio/timer.mp3');
+    smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
     smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
     smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
-
-    // Preload audio assets
     
     // Get the prompt from the parameters passed from home
     this.prompt = navParams.get('prompt');
@@ -33,6 +39,24 @@ export class GuessPage {
     this.imgPrompt = (this.prompt.type === 'image');
     this.textPrompt = (this.prompt.type === 'text');
     this.audioPrompt = (this.prompt.type === 'audio');
+
+    this.timer = setTimeout(() => { this.stopTimer(true); }, this.timerDuration);
+    this.timerRunning = true;
+
+    this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
+  }
+
+  ionViewWillLeave() {
+    this.stopTimer(false);
+  }
+
+  stopTimer(showToast) {
+    this.timerRunning = false;
+    clearTimeout(this.timer);
+
+    if (showToast) {
+      this.presentToast('Stuck? Tap on a guess box to get a hint!', 5000, 'bottom', true); 
+    }
   }
 
   /**
@@ -71,11 +95,14 @@ export class GuessPage {
         // Set bool for class to true
         this.prompt.responses[correctResponse].guessed = true;
 
+        // If timer was running
+        this.player.addCoins(this.prompt.responses[correctResponse].points, this.timerRunning);
+
         // Play audio
         this.smartAudio.play('correctPing');
-
+        const message = (this.timerRunning) ? 'Correct Answer! You receive bonus points!' : 'Correct Answer!';
         // Present toast to alert user the answer was correct
-        this.presentToast('Correct Answer!', 3000, 'bottom', true);      
+        this.presentToast(message, 3000, 'bottom', true);      
 
         this.checkIfLevelIsCompleted();
       } else {
@@ -108,8 +135,52 @@ export class GuessPage {
 
     if (isLevelFinished) {
       this.prompt.completed = true;
+      this.smartAudio.play('fanfare');
       this.presentAlert(alertProps.title, alertProps.description, alertProps.buttons);
     }
+  }
+
+  cardTapped(event, response) {
+    if (response.guessed) return null;
+
+    const poorProps = {
+      title: 'Not enough coins!',
+      description: 'You don\'t have enough coins to purchase this hint.',
+      buttons: [{
+        text: 'OK 🙁',
+        handler: () => {
+          return null;
+        }
+      }],
+    };
+
+    const alertProps = {
+      title: 'Purchase Hint',
+      description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a description of the answer. For 100 coins you can see the answer with missing letters.',
+      buttons: [{
+        text: 'Blurb 50 coins',
+        handler: () => {
+          if (this.player.coins > 50) {
+            this.player.spendCoins(50);
+            this.hint = response.hint;
+          } else {
+            this.presentAlert(poorProps.title, poorProps.description, poorProps.buttons);
+          }
+        }
+      }, {
+        text: 'Partial word 100 coins',
+        handler: () => {
+          if (this.player.coins > 100) {
+            this.player.spendCoins(100);
+            this.hint = response.partialResponse;
+          } else {
+            this.presentAlert(poorProps.title, poorProps.description, poorProps.buttons);
+          }
+        }
+      }]
+    };
+
+    this.presentAlert(alertProps.title, alertProps.description, alertProps.buttons);
   }
 
   /**

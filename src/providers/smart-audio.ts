@@ -31,7 +31,7 @@ export class SmartAudio {
     this.sounds.push(audio);
   }
 
-  play(key){
+  play(key) {
     // Find thr audio in the sounds array using its key
     let audio = this.sounds.find((sound) => {
         return sound.key === key;
@@ -53,6 +53,33 @@ export class SmartAudio {
           let audioAsset = new Audio(audio.asset);
           // Play audio asset
           audioAsset.play();
+      });
+    }
+  }
+
+  pause(key) {
+    console.log('STOP');
+    // Find thr audio in the sounds array using its key
+    let audio = this.sounds.find((sound) => {
+        return sound.key === key;
+    });
+
+    // If HTML5
+    if(audio.type === 'html5'){
+      // Create audio asset
+      let audioAsset = new Audio(audio.asset);
+      // Play audio asset
+      audioAsset.pause();
+    } else {
+      // Otherwise if native
+      // Create promise to play audio
+      this.nativeAudio.stop(audio.asset).then((res) => {
+          console.log(res);
+      }, (err) => {
+          console.log(err);
+          let audioAsset = new Audio(audio.asset);
+          // Play audio asset
+          audioAsset.pause();
       });
     }
   }

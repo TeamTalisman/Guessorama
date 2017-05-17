@@ -44883,6 +44883,7 @@ SmartAudio = __decorate([
 
 
 
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -44898,7 +44899,9 @@ SmartAudio = __decorate([
 /**
  * @private
  */
-function get(obj, path) {
+/**
+ * @private
+ */ function get(obj, path) {
     path = path.split('.');
     for (var i = 0; i < path.length; i++) {
         if (!obj) {
@@ -44960,6 +44963,7 @@ var cordovaWarn = function (pluginName, method) {
         console.warn('Native: tried accessing the ' + pluginName + ' plugin but Cordova is not available. Make sure to include cordova.js or run in a device/simulator');
     }
 };
+//# sourceMappingURL=util.js.map 
 //# sourceMappingURL=util.js.map
 
 /***/ }),
@@ -56084,10 +56088,9 @@ GuessPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
         selector: 'page-guess',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/'<!-- Header -->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name=\'menu\'></ion-icon>\n    </button>\n    <ion-title>{{ title }}</ion-title>\n  </ion-navbar>\n</ion-header>\n<!-- Content -->\n<ion-content class="guess">\n  <ion-list class=\'response-card-list\'>\n    <ion-card\n      *ngFor=\'let response of prompt.responses; let i = index;\'\n      class=\'response-card\'\n      [ngClass]=\'{ guessed: response.guessed , even: evenResponses }\'\n      (click)=\'cardTapped($event, response)\'\n    >\n      <!-- If this response has not been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'!response.guessed\'>\n        <!-- Show the points the response will award -->\n        {{ response.points }}\n      </ion-card-content>\n      <!-- Else If this response has been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'response.guessed\'>\n        <!-- Show the actual response -->\n        {{ response.response }}\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n  <section class=\'progress-bar\'[ngClass]=\'{ show: timerRunning }\'></section>\n  <section class=\'hint-section\'>\n  <p class=\'hint-text\'>\n    <em>{{ hint }}</em>\n  </p>\n</section>\n  <article padding>\n    <header>\n      <ion-card>\n        <ion-card-header class=\'prompt-header\'>\n          <!-- If Text prompt show this -->\n          <h2 *ngIf=\'textPrompt\' class=\'prompt-header-text\'>\n            {{ prompt.prompt }}\n          </h2>\n          <!-- If image prompt show this -->\n          <img *ngIf=\'imgPrompt\' src="./assets/img/prompts/{{prompt.prompt}}" />\n        </ion-card-header>\n      </ion-card>\n    </header>\n    <section>\n      <ion-item>\n        <ion-label floating class=\'placeholder-label\'>\n          Enter your guesses...\n        </ion-label>\n        <ion-input type=\'text\' (keypress)=\'textEntered($event)\' clearInput></ion-input>\n      </ion-item>\n    </section>\n  </article>\n</ion-content>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
 ], GuessPage);
 
-var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=guess.js.map
 
 /***/ }),
@@ -58551,7 +58554,9 @@ function instanceAvailability(pluginObj, methodName) {
     return pluginObj._objectInstance && (!methodName || typeof pluginObj._objectInstance[methodName] !== 'undefined');
 }
 function setIndex(args, opts, resolve, reject) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     // ignore resolve and reject in case sync
     if (opts.sync) {
         return args;
@@ -58615,7 +58620,9 @@ function setIndex(args, opts, resolve, reject) {
     return args;
 }
 function callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     // Try to figure out where the success/error callbacks need to be bound
     // to our promise resolve/reject handlers.
     args = setIndex(args, opts, resolve, reject);
@@ -58629,7 +58636,9 @@ function callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject) {
     }
 }
 function wrapPromise(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     var pluginResult, rej;
     var p = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* getPromise */])(function (resolve, reject) {
         pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject);
@@ -58645,7 +58654,9 @@ function wrapPromise(pluginObj, methodName, args, opts) {
     return p;
 }
 function wrapOtherPromise(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* getPromise */])(function (resolve, reject) {
         var pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts);
         if (pluginResult) {
@@ -58662,7 +58673,9 @@ function wrapOtherPromise(pluginObj, methodName, args, opts) {
     });
 }
 function wrapObservable(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
         var pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, observer.next.bind(observer), observer.error.bind(observer));
         if (pluginResult && pluginResult.error) {
@@ -58686,7 +58699,9 @@ function wrapObservable(pluginObj, methodName, args, opts) {
     });
 }
 function callInstance(pluginObj, methodName, args, opts, resolve, reject) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     args = setIndex(args, opts, resolve, reject);
     if (instanceAvailability(pluginObj, methodName)) {
         return pluginObj._objectInstance[methodName].apply(pluginObj._objectInstance, args);
@@ -58700,7 +58715,9 @@ function callInstance(pluginObj, methodName, args, opts, resolve, reject) {
  * @returns {Observable}
  */
 function wrapEventObservable(event, element) {
-    if (element === void 0) { element = window; }
+    if (element === void 0) {
+        element = window;
+    }
     return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].fromEvent(element, event);
 }
 /**
@@ -58712,7 +58729,9 @@ function wrapEventObservable(event, element) {
  * @private
  */
 function overrideFunction(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
         var availabilityCheck = checkAvailability(pluginObj, methodName);
         if (availabilityCheck === true) {
@@ -58730,7 +58749,9 @@ function overrideFunction(pluginObj, methodName, args, opts) {
  * @private
  */
 var wrap = function (pluginObj, methodName, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -58758,7 +58779,9 @@ var wrap = function (pluginObj, methodName, opts) {
  * @private
  */
 function wrapInstance(pluginObj, methodName, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -58810,6 +58833,7 @@ function wrapInstance(pluginObj, methodName, opts) {
         }
     };
 }
+//# sourceMappingURL=plugin.js.map 
 //# sourceMappingURL=plugin.js.map
 
 /***/ }),
@@ -58823,7 +58847,9 @@ function wrapInstance(pluginObj, methodName, opts) {
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        function (d, b) { for (var p in b)
+            if (b.hasOwnProperty(p))
+                d[p] = b[p]; };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -58832,12 +58858,17 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+        r = Reflect.decorate(decorators, target, key, desc);
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i])
+                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+        return Reflect.metadata(k, v);
 };
 
 
@@ -58985,6 +59016,7 @@ NativeAudio = __decorate([
     })
 ], NativeAudio);
 
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -58997,12 +59029,17 @@ NativeAudio = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashScreen; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+        r = Reflect.decorate(decorators, target, key, desc);
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i])
+                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+        return Reflect.metadata(k, v);
 };
 
 
@@ -59041,17 +59078,17 @@ var SplashScreen = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], SplashScreen.prototype, "show", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], SplashScreen.prototype, "hide", null);
     SplashScreen = __decorate([
@@ -59060,11 +59097,12 @@ var SplashScreen = (function () {
             plugin: 'cordova-plugin-splashscreen',
             pluginRef: 'navigator.splashscreen',
             repo: 'https://github.com/apache/cordova-plugin-splashscreen'
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SplashScreen);
     return SplashScreen;
 }());
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -59077,12 +59115,17 @@ var SplashScreen = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatusBar; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+        r = Reflect.decorate(decorators, target, key, desc);
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i])
+                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+        return Reflect.metadata(k, v);
 };
 
 
@@ -59176,77 +59219,77 @@ var StatusBar = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Boolean]), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [Boolean]),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "overlaysWebView", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleDefault", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleLightContent", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleBlackTranslucent", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleBlackOpaque", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [String]), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [String]),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "backgroundColorByName", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [String]), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [String]),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "backgroundColorByHexString", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "hide", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "show", null);
     __decorate([
-        __WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["d" /* CordovaProperty */], 
+        __WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["d" /* CordovaProperty */],
         __metadata('design:type', Boolean)
     ], StatusBar.prototype, "isVisible", void 0);
     StatusBar = __decorate([
@@ -59256,11 +59299,12 @@ var StatusBar = (function () {
             pluginRef: 'StatusBar',
             repo: 'https://github.com/apache/cordova-plugin-statusbar',
             platforms: ['iOS', 'Android', 'Windows Phone 8', 'Windows 8', 'Windows 10']
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], StatusBar);
     return StatusBar;
 }());
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -77147,27 +77191,24 @@ exports.tryCatch = tryCatch;
 /***/ (function(module, exports) {
 
 var g;
-
 // This works in non-strict mode
-g = (function() {
-	return this;
+g = (function () {
+    return this;
 })();
-
 try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
+    // This works if eval is allowed (see CSP)
+    g = g || Function("return this")() || (1, eval)("this");
 }
-
+catch (e) {
+    // This works if the window reference is available
+    if (typeof window === "object")
+        g = window;
+}
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
 // easier to handle this case. if(!global) { ...}
-
 module.exports = g;
-
+//# sourceMappingURL=global.js.map
 
 /***/ }),
 /* 200 */
@@ -103638,6 +103679,7 @@ function checkReady() {
         }
     }, DEVICE_READY_TIMEOUT);
 }
+//# sourceMappingURL=bootstrap.js.map 
 //# sourceMappingURL=bootstrap.js.map
 
 /***/ }),
@@ -103668,7 +103710,9 @@ function checkReady() {
  * @private
  */
 function InstanceCheck(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (pluginObj, methodName, descriptor) {
         return {
             value: function () {
@@ -103697,7 +103741,9 @@ function InstanceCheck(opts) {
  * @private
  */
 function CordovaCheck(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (pluginObj, methodName, descriptor) {
         return {
             value: function () {
@@ -103781,7 +103827,9 @@ function Plugin(config) {
  * and the required plugin are installed.
  */
 function Cordova(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (target, methodName, descriptor) {
         return {
             value: function () {
@@ -103800,7 +103848,9 @@ function Cordova(opts) {
  * Wrap an instance method
  */
 function CordovaInstance(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (target, methodName) {
         return {
             value: function () {
@@ -103861,7 +103911,9 @@ function InstanceProperty(target, key) {
  * and the required plugin are installed.
  */
 function CordovaFunctionOverride(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (target, methodName, descriptor) {
         return {
             value: function () {
@@ -103881,7 +103933,9 @@ function CordovaFunctionOverride(opts) {
  *
  */
 function CordovaFiniteObservable(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     if (opts.observable === false) {
         throw new Error('CordovaFiniteObservable decorator can only be used on methods that returns observable. Please provide correct option.');
     }
@@ -103913,6 +103967,7 @@ function CordovaFiniteObservable(opts) {
         };
     };
 }
+//# sourceMappingURL=decorators.js.map 
 //# sourceMappingURL=decorators.js.map
 
 /***/ }),
@@ -103948,6 +104003,7 @@ var IonicNativePlugin = (function () {
     return IonicNativePlugin;
 }());
 
+//# sourceMappingURL=ionic-native-plugin.js.map 
 //# sourceMappingURL=ionic-native-plugin.js.map
 
 /***/ }),

@@ -4,6 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name='menu'></ion-icon>
     </button>
+    <ion-title>{{ title }}</ion-title>
   </ion-navbar>
 </ion-header>
 <!-- Content -->
@@ -12,7 +13,7 @@
     <ion-card
       *ngFor='let response of prompt.responses; let i = index;'
       class='response-card'
-      [ngClass]="(response.guessed) ? 'guessed' : '' "
+      [ngClass]='{ guessed: response.guessed , even: evenResponses }'
       (click)='cardTapped($event, response)'
     >
       <!-- If this response has not been guessed -->
@@ -27,10 +28,10 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
-  <section class='progress-bar'[ngClass]="(timerRunning) ? 'show' : '' "></section>
+  <section class='progress-bar'[ngClass]='{ show: timerRunning }'></section>
   <section class='hint-section'>
   <p class='hint-text'>
-    {{ hint }}
+    <em>{{ hint }}</em>
   </p>
 </section>
   <article padding>
@@ -49,7 +50,7 @@
     <section>
       <ion-item>
         <ion-label floating class='placeholder-label'>
-          Enter your guesses...
+          Enter what comes to find when you see the prompt...
         </ion-label>
         <ion-input type='text' (keypress)='textEntered($event)' clearInput></ion-input>
       </ion-item>

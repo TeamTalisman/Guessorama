@@ -6,7 +6,7 @@ export class Player {
   coins: number;
 
   constructor() {
-    this.coins = 0;
+    this.coins = 75;
     this.name = 'You';
   }
 

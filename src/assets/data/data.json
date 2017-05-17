@@ -3,43 +3,44 @@
     {
       "id": 0,
       "type": "text",
-      "prompt": "Pokémon Red & Blue",
+      "prompt": "Pokemon Red & Blue",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 15,
-          "hint": "Used to capture Pokémon",
+          "hint": "Used to capture Pokemon",
           "response": "pokeball",
           "guessed": false,
-          "partialResponse": "p ke b ll"
+          "partialResponse": "p_ke_b_ll"
           },
         {
           "points": 15,
           "hint": "Fire lizard with wing",
           "response": "charizard",
           "guessed": false,
-          "partialResponse": "Ch r z rd"
+          "partialResponse": "Ch_r_z_rd"
         },
         {
           "points": 20,
           "hint": "Has an annoying grandson",
           "response": "professor oak",
           "guessed": false,
-          "partialResponse": "P of s or O k"
+          "partialResponse": "P_of_s_or O_k"
         },
         {
           "points": 20,
           "hint": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments",
           "response": "mewtwo",
           "guessed": false,
-          "partialResponse": "M w w "
+          "partialResponse": "M_w_w_"
         },
         {
           "points": 30,
           "hint": "Yellow Mouse",
           "response": "pikachu",
           "guessed": false,
-          "partialResponse": "P ka hu"
+          "partialResponse": "P_ka_hu"
         }
       ]
     },
@@ -48,41 +49,42 @@
       "type": "text",
       "prompt": "Super Mario Bros Characters",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 15,
           "hint": "The red plumber",
           "response": "mario",
           "guessed": false,
-          "partialResponse": "M r o"
+          "partialResponse": "M_r_o"
         },
         {
           "points": 15,
           "hint": "Green plumber",
           "response": "luigi",
           "guessed": false,
-          "partialResponse": "L i i"
+          "partialResponse": "L_i_i"
         },
         {
           "points": 20,
           "hint": "Princess of Mushroom Kingdom",
-          "response": "peach",
+          "response": "princess peach",
           "guessed": false,
-          "partialResponse": "P a h"
+          "partialResponse": "P_i_c_es_ P_a_h"
         },
         {
           "points": 20,
           "hint": "Kidnaps the princess",
           "response": "bowser",
           "guessed": false,
-          "partialResponse": "B ws r"
+          "partialResponse": "B_ws_r"
         },
         {
           "points": 30,
           "hint": "Friendly Dinosaur",
           "response": "yoshi",
           "guessed": false,
-          "partialResponse": "Y s i"
+          "partialResponse": "Y_s_i"
         }
       ]
     },
@@ -91,41 +93,42 @@
       "type": "text",
       "prompt": "Mario Kart Items",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 15,
           "hint": "Makes racers trip",
           "response": "banana",
           "guessed": false,
-          "partialResponse": " a a a"
+          "partialResponse": "_a_a_a"
         },
         {
           "points": 15,
           "hint": "Comes in three different colors which racer can throw at others",
           "response": "shell",
           "guessed": false,
-          "partialResponse": "s l "
+          "partialResponse": "s__l_"
         },
         {
           "points": 20,
           "hint": "Blows up!",
           "response": "bob-omb",
           "guessed": false,
-          "partialResponse": "b b- mb"
+          "partialResponse": "b_b-_mb"
         },
         {
           "points": 20,
           "hint": "Boosts racer while knocking others of the track",
           "response": "bullet bill",
           "guessed": false,
-          "partialResponse": "b ll t b ll"
+          "partialResponse": "b_ll_t b_ll"
         },
         {
           "points": 30,
           "hint": "Covers racer's screen in black bloopingness so they can't see",
           "response": "blooper",
           "guessed": false,
-          "partialResponse": " l o er"
+          "partialResponse": "_l_o_er"
         }
       ]
     },
@@ -134,41 +137,42 @@
       "type": "image",
       "prompt": "overwatch.png",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 10,
           "hint": "The ability to Teleport",
           "response": "tracer",
           "guessed": false,
-          "partialResponse": " T er"
+          "partialResponse": "T___er"
         },
         {
           "points": 15,
           "hint": "Has a younger brother named Genji",
           "response": "hanzo",
           "guessed": false,
-          "partialResponse": "h o "
+          "partialResponse": "H_n_o "
         },
         {
           "points": 20,
           "hint": "Former leader of Overwatch",
           "response": "soldier 76",
           "guessed": false,
-          "partialResponse": " s er 76"
+          "partialResponse": "S_ld__r 76"
         },
         {
           "points": 20,
           "hint": "Uses her staff to heal allies",
           "response": "mercy",
           "guessed": false,
-          "partialResponse": "m y"
+          "partialResponse": "M_rc_"
         },
         {
           "points": 30,
           "hint": "Professional gamer and a mech pilot",
           "response": "d.va",
           "guessed": false,
-          "partialResponse": "d va"
+          "partialResponse": "_.v_"
         }
       ]
     },
@@ -177,48 +181,49 @@
       "type": "image",
       "prompt": "org_13.png",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 10,
-          "hint": "Sora's nobody",
+          "hint": "Sora's Nobody",
           "response": "roxas",
           "guessed": false,
-          "partialResponse": "r as"
+          "partialResponse": "R_x_s"
         },
         {
           "points": 15,
           "hint": "Uses the power of fire",
           "response": "axel",
           "guessed": false,
-          "partialResponse": "a el "
+          "partialResponse": "A_e_"
         },
         {
           "points": 20,
           "hint": "Uses the power of water",
           "response": "demyx",
           "guessed": false,
-          "partialResponse": "d yx"
+          "partialResponse": "D_m_x"
         },
         {
           "points": 20,
           "hint": "axel's former friend",
           "response": "saix",
           "guessed": false,
-          "partialResponse": "s ix"
+          "partialResponse": "Sa_x"
         },
         {
           "points": 20,
           "hint": "Leader of the organization",
           "response": "xemnas",
           "guessed": false,
-          "partialResponse": "s ix"
+          "partialResponse": "X__n_s"
         },
         {
           "points": 30,
           "hint": "Led the rebellion within the organization",
           "response": "marluxia",
           "guessed": false,
-          "partialResponse": "m xia "
+          "partialResponse": "M_r_ux_a"
         }
       ]
     },
@@ -227,98 +232,348 @@
       "type": "image",
       "prompt": "mass_effect_race.png",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 10,
           "hint": "A race of blue asexuals. powerful in biotics",
           "response": "asari",
           "guessed": false,
-          "partialResponse": "a ri"
+          "partialResponse": "As_r_"
         },
         {
           "points": 15,
           "hint": "A race of hypermetabolic humanoids",
-          "response": "Salarian",
+          "response": "salarian",
           "guessed": false,
-          "partialResponse": "s l rian"
+          "partialResponse": "S_l_ri_n"
         },
         {
           "points": 20,
           "hint": "A race of humanoids comparible in size to humans",
           "response": "turian",
           "guessed": false,
-          "partialResponse": "t ian"
+          "partialResponse": "T_r__n"
         },
         {
           "points": 20,
           "hint": "A race of blood thirsty dinosaur-like humanoids",
           "response": "krogan",
           "guessed": false,
-          "partialResponse": "s ix"
+          "partialResponse": "Kr_g_n"
         },
         {
           "points": 20,
           "hint": "A species with an extremely weak immune system and must wear protective suits.",
           "response": "quarian",
           "guessed": false,
-          "partialResponse": "qu rian"
+          "partialResponse": "_uar__n"
         },
         {
           "points": 30,
           "hint": "Race of synthetic machines with a connected AI network",
           "response": "geth",
           "guessed": false,
-          "partialResponse": "g th "
+          "partialResponse": "__th"
         }
       ]
     },
-     {
+    {
       "id": 6,
       "type": "text",
       "prompt": "Best-Selling Video Game Franchises",
       "completed": false,
+      "viewed": false,
       "responses": [
         {
           "points": 10,
           "hint": "The official mascot of Nintendo",
           "response": "mario",
           "guessed": false,
-          "partialResponse": "m rio"
+          "partialResponse": "M_r__"
         },
         {
           "points": 15,
           "hint": " A falling-blocks puzzle video game",
           "response": "tetris",
           "guessed": false,
-          "partialResponse": "s l rian"
+          "partialResponse": "T_tr_s"
         },
         {
           "points": 20,
           "hint": "A series of strategic life simulation",
           "response": "sims",
           "guessed": false,
-          "partialResponse": "s ms"
+          "partialResponse": "S__s"
         },
         {
           "points": 20,
           "hint": "A role-playing video game for the Game Boy",
           "response": "pokemon",
           "guessed": false,
-          "partialResponse": "p mon"
+          "partialResponse": "Po__m_n"
         },
          {
            "points": 20,
           "hint": "An open world action-adventure video game series created by David Jones",
           "response": "grand theft auto",
           "guessed": false,
-          "partialResponse": "gra the aut"
+          "partialResponse": "Gr__d T___t A_t_"
         },
         {
           "points": 30,
           "hint": "A first-person shooter video game series",
           "response": "call of duty",
           "guessed": false,
-          "partialResponse": "c of d"
+          "partialResponse": "Ca__ __ D__y"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "image",
+      "prompt": "starcraft.jpg",
+      "completed": false,
+      "viewed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "Blizzard RTS game franchise set in the future",
+          "response": "starcraft",
+          "guessed": false,
+          "partialResponse": "st_rcr__t"
+        },
+        {
+          "points": 15,
+          "hint": "Common name for humans in the universe",
+          "response": "terran",
+          "guessed": false,
+          "partialResponse": "Te__an"
+        },
+        {
+          "points": 20,
+          "hint": "Name of the insectoid alien race",
+          "response": "zerg",
+          "guessed": false,
+          "partialResponse": "z__g"
+        },
+        {
+          "points": 20,
+          "hint": "Name of race with advanced technology and psionic powers",
+          "response": "protoss",
+          "guessed": false,
+          "partialResponse": "P_o_o__"
+        },
+         {
+           "points": 20,
+          "hint": "Hydrocarbon compound which is the most plentiful high-performance fuel in the galaxy.",
+          "response": "vespene gas",
+          "guessed": false,
+          "partialResponse": "v_sp_n_ G__"
+        },
+        {
+          "points": 30,
+          "hint": "They were the first, born within the Void. Their sacred purpose was to cultivate life and perpetuate the Infinite Cycle.",
+          "response": "xel'naga",
+          "guessed": false,
+          "partialResponse": "x__'_a_a"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "image",
+      "prompt": "ff7.jpg",
+      "completed": false,
+      "viewed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "Originally a member of SOLDIER, he is now a mercenary who will take any job...",
+          "response": "cloud",
+          "guessed": false,
+          "partialResponse": "C___d"
+        },
+        {
+          "points": 15,
+          "hint": "Killed by Sephiroth with Masasume in a temple",
+          "response": "aerith",
+          "guessed": false,
+          "partialResponse": "__r_th"
+        },
+        {
+          "points": 20,
+          "hint": "A great warrior in the SOLDIER program, he began to hate Shinra when finding out about the experiments. Over time he began to hate everything.",
+          "response": "sephiroth",
+          "guessed": false,
+          "partialResponse": "s_p__r_t_"
+        },
+        {
+          "points": 20,
+          "hint": "A first class SOLDIER he was Cloud's best friend and wielder of Buster Sword",
+          "response": "zack",
+          "guessed": false,
+          "partialResponse": "z_ck"
+        },
+         {
+           "points": 20,
+          "hint": "Zack Fair's mentor, he passed the Buster Sword to him.",
+          "response": "angeal",
+          "guessed": false,
+          "partialResponse": "_ng__l"
+        },
+        {
+          "points": 30,
+          "hint": "My soul, corrupted by vengeance, hath endured torment to find the end of the journey, in my own salvation and your eternal slumber",
+          "response": "genesis",
+          "guessed": false,
+          "partialResponse": "G_n_s_s"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "image",
+      "prompt": "gta5.jpg",
+      "completed": false,
+      "viewed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "Rockstar North's 2013 best-selling open world action-adventure video game",
+          "response": "grand theft auto 5",
+          "guessed": false,
+          "partialResponse": "_r_nd th_f_ __t_ 5"
+        },
+        {
+          "points": 15,
+          "hint": "Retired former bank robber who lives with his dysfunctional family on the proceeds of his former life",
+          "response": "michael",
+          "guessed": false,
+          "partialResponse": "M_ch__l"
+        },
+        {
+          "points": 20,
+          "hint": "Gang member who makes a living as a repo man for an unscrupulous Armenian car dealership",
+          "response": "franklin",
+          "guessed": false,
+          "partialResponse": "fr__k__n"
+        },
+        {
+          "points": 20,
+          "hint": "Lives alone in a trailer in the desert, where his reckless and psychotic behaviours are fuelled by drug addiction",
+          "response": "trevor",
+          "guessed": false,
+          "partialResponse": "tr_v_r"
+        },
+         {
+          "points": 20,
+          "hint": "Billionaire investor and corporate raider. Employs the characters to steal cars",
+          "response": "devin",
+          "guessed": false,
+          "partialResponse": "d_v_n"
+        },
+        {
+          "points": 30,
+          "hint": "Decorated FIB Agent",
+          "response": "steve",
+          "guessed": false,
+          "partialResponse": "st_v_"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "text",
+      "prompt": "Popular Mobile Games",
+      "completed": false,
+      "viewed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "Answer the call of the mustache! Customize your village, build an army and crush your opponents.",
+          "response": "clash of clans",
+          "guessed": false,
+          "partialResponse": "_l_sh __ Cl_ns"
+        },
+        {
+          "points": 15,
+          "hint": "Launch avians at pigs",
+          "response": "angry birds",
+          "guessed": false,
+          "partialResponse": "_ng___ bi__s"
+        },
+        {
+          "points": 20,
+          "hint": "Can you avoid hitting a tube?",
+          "response": "flappy bird",
+          "guessed": false,
+          "partialResponse": "fla___ b__d"
+        },
+        {
+          "points": 20,
+          "hint": "Play with your favorite Warcraft characters in this fun card game",
+          "response": "hearthstone",
+          "guessed": false,
+          "partialResponse": "h__rthst_n_"
+        },
+         {
+          "points": 20,
+          "hint": "Your favorite Italian plumber now on mobile",
+          "response": "super mario run",
+          "guessed": false,
+          "partialResponse": "s_p_r m_r__ r_n"
+        },
+        {
+          "points": 30,
+          "hint": "Explore cities and towns where you live—and even around the globe—to capture as many Pokémon as you can.",
+          "response": "pokemon go",
+          "guessed": false,
+          "partialResponse": "po__m_n __"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "image",
+      "prompt": "block.png",
+      "completed": false,
+      "viewed": false,
+      "responses": [
+        {
+          "points": 10,
+          "hint": "Yellow currency",
+          "response": "coin",
+          "guessed": false,
+          "partialResponse": "c__n"
+        },
+        {
+          "points": 15,
+          "hint": "Comes in a variety of colors, can increase your size, can grant an extra life...",
+          "response": "mushroom",
+          "guessed": false,
+          "partialResponse": "m__h__m"
+        },
+        {
+          "points": 20,
+          "hint": "Grants the plumber the ability to shoot fireballs",
+          "response": "flower",
+          "guessed": false,
+          "partialResponse": "f__w_r"
+        },
+        {
+          "points": 20,
+          "hint": "Makes the plumber invincible for a few seconds",
+          "response": "star",
+          "guessed": false,
+          "partialResponse": "s__r"
+        },
+         {
+          "points": 20,
+          "hint": "Friendly dinosaur that hatches from egg and carries you around",
+          "response": "yoshi",
+          "guessed": false,
+          "partialResponse": "yoshi"
         }
       ]
     }

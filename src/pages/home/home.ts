@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { AlertController, ToastController } from 'ionic-angular';
 import { GuessPage } from '../guess/guess';
 import { Injectable } from '@angular/core';
 import { Player } from '../../providers/player';
@@ -16,10 +16,12 @@ import { SmartAudio } from '../../providers/smart-audio';
 export class HomePage {
   selectedLevel: any;
   levels: Array<{ id: number, title: string, promptId: number, completed: boolean }>
+  gameFinished: boolean;
 
-  constructor(public promptsService: Prompts, public player: Player, public smartAudio: SmartAudio, public navCtrl: NavController, public toastCtrl: ToastController) {
+  constructor(public promptsService: Prompts, public player: Player, public smartAudio: SmartAudio, public navCtrl: NavController, public alertCtrl: AlertController, public toastCtrl: ToastController) {
     smartAudio.preload('bloop', 'assets/audio/bloop.mp3');
     smartAudio.preload('ambient', 'assets/audio/ambient.mp3');
+    this.smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
 
     this.levels = [];
   }
@@ -45,6 +47,43 @@ export class HomePage {
       const completed = this.promptsService.prompts[promptIndex].completed;
       level.completed = completed;
     });
+
+    if (!this.gameFinished) {
+      this.checkIfGameEnded();
+    }
+  }
+
+  onNameTap() {
+    let prompt = this.alertCtrl.create({
+      title: 'Change Name',
+      message: 'Enter your name',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Jane Doe'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            return null;
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            if (data.name.length > 0) {
+              this.presentToast('😎 Your name has been updated.', 3000, 'top', true);               
+              this.player.changeName(data.name);
+            } else {
+              this.presentToast('😅 To change your name you need to enter an actual name.', 3000, 'top', true); 
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   /**
@@ -59,7 +98,7 @@ export class HomePage {
     } else {
       this.smartAudio.play('bloop');
       const newLevel = this.promptsService.prompts[level.promptId];
-      this.navCtrl.push(GuessPage, { prompt: newLevel });
+      this.navCtrl.push(GuessPage, { prompt: newLevel, level: level });
     }
   }
 
@@ -80,5 +119,31 @@ export class HomePage {
     });
 
     toast.present();
+  }
+
+  checkIfGameEnded() {
+    let isGameFinished = true;
+    let prompt = this.alertCtrl.create({
+        title: '🎉🎉🎉',
+        subTitle: 'Congratulations! You have completed every level!',
+        buttons: [{
+          text: 'OK',
+          handler: () => {
+            return null;
+          }
+        }],
+    });
+
+    this.levels.forEach((level) => {
+      if (!level.completed) {
+        isGameFinished = false;
+      }
+    });
+
+    if (isGameFinished) {
+      this.smartAudio.play('fanfare');
+      this.gameFinished = true;
+      prompt.present();
+    }
   }
 }

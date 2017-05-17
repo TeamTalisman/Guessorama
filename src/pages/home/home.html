@@ -7,8 +7,17 @@
   <!-- Header -->
   <header class='home-header' primary-color>
     <section class='home-header-topbar'>
-      <p class="points-number">Coins: {{this.player.coins}}</p>
-      <!--<ion-icon class="points-icon" name="star"></ion-icon>-->
+      <section>
+        <p (click)='onNameTap()'>
+          {{ this.player.name }}
+        </p>
+      </section>
+      <section>
+        <p class="points-number">
+          Coins: {{ this.player.coins }}
+          <ion-icon name='ios-radio-button-on'></ion-icon>
+        </p>
+      </section>
     </section>
     <section class='home-header-logo'>
       <img class="logo" src="./assets/img/guessoramatitle.png">
@@ -18,7 +27,7 @@
   <ion-list class='level-card-container'>
       <ion-card class='level-card'
         *ngFor='let level of levels'
-        [ngClass]="(level.completed) ? 'disabled' : ''"
+        [ngClass]='{ disabled: level.completed }'
         (click)='levelTapped($event, level)'
       >
         <ion-card-content class='level-card-content'>

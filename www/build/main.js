@@ -37466,7 +37466,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var Player = (function () {
     function Player() {
-        this.coins = 0;
+        this.coins = 75;
         this.name = 'You';
     }
     Player.prototype.changeName = function (name) {
@@ -44699,7 +44699,6 @@ var Prompts = (function () {
         this.prompts = [];
         this.remainingPrompts = [];
         this.currentPrompt = {};
-        console.log('Hello Prompts Provider');
         this.promptObserver = null;
         // Create observer
         this.prompt = __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].create(function (observer) {
@@ -44883,6 +44882,7 @@ SmartAudio = __decorate([
 
 
 
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -44898,7 +44898,9 @@ SmartAudio = __decorate([
 /**
  * @private
  */
-function get(obj, path) {
+/**
+ * @private
+ */ function get(obj, path) {
     path = path.split('.');
     for (var i = 0; i < path.length; i++) {
         if (!obj) {
@@ -44960,6 +44962,7 @@ var cordovaWarn = function (pluginName, method) {
         console.warn('Native: tried accessing the ' + pluginName + ' plugin but Cordova is not available. Make sure to include cordova.js or run in a device/simulator');
     }
 };
+//# sourceMappingURL=util.js.map 
 //# sourceMappingURL=util.js.map
 
 /***/ }),
@@ -55885,7 +55888,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var GuessPage = (function () {
     function GuessPage(player, navCtrl, navParams, smartAudio, alertCtrl, toastCtrl) {
-        var _this = this;
         this.player = player;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -55895,22 +55897,30 @@ var GuessPage = (function () {
         this.textPrompt = false;
         this.imgPrompt = false;
         this.audioPrompt = false;
-        this.timerDuration = 25000;
-        // Preload audio assets
-        smartAudio.preload('timer', 'assets/audio/timer.mp3');
-        smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
-        smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
-        smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
+        this.timerDuration = 45000;
         // Get the prompt from the parameters passed from home
         this.prompt = navParams.get('prompt');
+        this.title = navParams.get('level').title;
+        this.evenResponses = this.prompt.responses.length % 2 === 0;
+    }
+    GuessPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        // Preload audio assets
+        this.smartAudio.preload('timer', 'assets/audio/timer.mp3');
+        this.smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
+        this.smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
+        this.smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
+        this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
+        if (!this.prompt.viewed) {
+            this.timer = setTimeout(function () { _this.stopTimer(true); }, this.timerDuration);
+            this.timerRunning = true;
+        }
         // This is for checking what content we display
         this.imgPrompt = (this.prompt.type === 'image');
         this.textPrompt = (this.prompt.type === 'text');
         this.audioPrompt = (this.prompt.type === 'audio');
-        this.timer = setTimeout(function () { _this.stopTimer(true); }, this.timerDuration);
-        this.timerRunning = true;
-        this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
-    }
+        this.prompt.viewed = true;
+    };
     GuessPage.prototype.ionViewWillLeave = function () {
         this.stopTimer(false);
     };
@@ -56007,9 +56017,9 @@ var GuessPage = (function () {
         };
         var alertProps = {
             title: 'Purchase Hint',
-            description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a description of the answer. For 100 coins you can see the answer with missing letters.',
+            description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a descriptive blurb. For 100 coins you\'ll see parts of the answer.',
             buttons: [{
-                    text: 'Blurb 50 coins',
+                    text: 'Blurb: 50 coins',
                     handler: function () {
                         if (_this.player.coins > 50) {
                             _this.player.spendCoins(50);
@@ -56020,7 +56030,7 @@ var GuessPage = (function () {
                         }
                     }
                 }, {
-                    text: 'Partial word 100 coins',
+                    text: 'Partial Answer: 100 coins',
                     handler: function () {
                         if (_this.player.coins > 100) {
                             _this.player.spendCoins(100);
@@ -56029,6 +56039,11 @@ var GuessPage = (function () {
                         else {
                             _this.presentAlert(poorProps.title, poorProps.description, poorProps.buttons);
                         }
+                    }
+                }, {
+                    text: 'Cancel',
+                    handler: function () {
+                        return null;
                     }
                 }]
         };
@@ -56070,12 +56085,11 @@ var GuessPage = (function () {
 }());
 GuessPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-guess',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/'<!-- Header -->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name=\'menu\'></ion-icon>\n    </button>\n  </ion-navbar>\n</ion-header>\n<!-- Content -->\n<ion-content class="guess">\n  <ion-list class=\'response-card-list\'>\n    <ion-card\n      *ngFor=\'let response of prompt.responses; let i = index;\'\n      class=\'response-card\'\n      [ngClass]="(response.guessed) ? \'guessed\' : \'\' "\n      (click)=\'cardTapped($event, response)\'\n    >\n      <!-- If this response has not been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'!response.guessed\'>\n        <!-- Show the points the response will award -->\n        {{ response.points }}\n      </ion-card-content>\n      <!-- Else If this response has been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'response.guessed\'>\n        <!-- Show the actual response -->\n        {{ response.response }}\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n  <section class=\'progress-bar\'[ngClass]="(timerRunning) ? \'show\' : \'\' "></section>\n  <section class=\'hint-section\'>\n  <p class=\'hint-text\'>\n    {{ hint }}\n  </p>\n</section>\n  <article padding>\n    <header>\n      <ion-card>\n        <ion-card-header class=\'prompt-header\'>\n          <!-- If Text prompt show this -->\n          <h2 *ngIf=\'textPrompt\' class=\'prompt-header-text\'>\n            {{ prompt.prompt }}\n          </h2>\n          <!-- If image prompt show this -->\n          <img *ngIf=\'imgPrompt\' src="./assets/img/prompts/{{prompt.prompt}}" />\n        </ion-card-header>\n      </ion-card>\n    </header>\n    <section>\n      <ion-item>\n        <ion-label floating class=\'placeholder-label\'>\n          Enter your guesses...\n        </ion-label>\n        <ion-input type=\'text\' (keypress)=\'textEntered($event)\' clearInput></ion-input>\n      </ion-item>\n    </section>\n  </article>\n</ion-content>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/
+        selector: 'page-guess',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/'<!-- Header -->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name=\'menu\'></ion-icon>\n    </button>\n    <ion-title>{{ title }}</ion-title>\n  </ion-navbar>\n</ion-header>\n<!-- Content -->\n<ion-content class="guess">\n  <ion-list class=\'response-card-list\'>\n    <ion-card\n      *ngFor=\'let response of prompt.responses; let i = index;\'\n      class=\'response-card\'\n      [ngClass]=\'{ guessed: response.guessed , even: evenResponses }\'\n      (click)=\'cardTapped($event, response)\'\n    >\n      <!-- If this response has not been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'!response.guessed\'>\n        <!-- Show the points the response will award -->\n        {{ response.points }}\n      </ion-card-content>\n      <!-- Else If this response has been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'response.guessed\'>\n        <!-- Show the actual response -->\n        {{ response.response }}\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n  <section class=\'progress-bar\'[ngClass]=\'{ show: timerRunning }\'></section>\n  <section class=\'hint-section\'>\n  <p class=\'hint-text\'>\n    <em>{{ hint }}</em>\n  </p>\n</section>\n  <article padding>\n    <header>\n      <ion-card>\n        <ion-card-header class=\'prompt-header\'>\n          <!-- If Text prompt show this -->\n          <h2 *ngIf=\'textPrompt\' class=\'prompt-header-text\'>\n            {{ prompt.prompt }}\n          </h2>\n          <!-- If image prompt show this -->\n          <img *ngIf=\'imgPrompt\' src="./assets/img/prompts/{{prompt.prompt}}" />\n        </ion-card-header>\n      </ion-card>\n    </header>\n    <section>\n      <ion-item>\n        <ion-label floating class=\'placeholder-label\'>\n          Enter what comes to find when you see the prompt...\n        </ion-label>\n        <ion-input type=\'text\' (keypress)=\'textEntered($event)\' clearInput></ion-input>\n      </ion-item>\n    </section>\n  </article>\n</ion-content>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
 ], GuessPage);
 
-var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=guess.js.map
 
 /***/ }),
@@ -56108,14 +56122,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = (function () {
-    function HomePage(promptsService, player, smartAudio, navCtrl, toastCtrl) {
+    function HomePage(promptsService, player, smartAudio, navCtrl, alertCtrl, toastCtrl) {
         this.promptsService = promptsService;
         this.player = player;
         this.smartAudio = smartAudio;
         this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
         smartAudio.preload('bloop', 'assets/audio/bloop.mp3');
         smartAudio.preload('ambient', 'assets/audio/ambient.mp3');
+        this.smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
         this.levels = [];
     }
     HomePage.prototype.ionViewDidLoad = function () {
@@ -56140,6 +56156,43 @@ var HomePage = (function () {
             var completed = _this.promptsService.prompts[promptIndex].completed;
             level.completed = completed;
         });
+        if (!this.gameFinished) {
+            this.checkIfGameEnded();
+        }
+    };
+    HomePage.prototype.onNameTap = function () {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: 'Change Name',
+            message: 'Enter your name',
+            inputs: [
+                {
+                    name: 'name',
+                    placeholder: 'Jane Doe'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: function (data) {
+                        return null;
+                    }
+                },
+                {
+                    text: 'Save',
+                    handler: function (data) {
+                        if (data.name.length > 0) {
+                            _this.presentToast('😎 Your name has been updated.', 3000, 'top', true);
+                            _this.player.changeName(data.name);
+                        }
+                        else {
+                            _this.presentToast('😅 To change your name you need to enter an actual name.', 3000, 'top', true);
+                        }
+                    }
+                }
+            ]
+        });
+        prompt.present();
     };
     /**
      * levelTapped - Get's a random prompt and sends it to the GuessPage as a param
@@ -56154,7 +56207,7 @@ var HomePage = (function () {
         else {
             this.smartAudio.play('bloop');
             var newLevel = this.promptsService.prompts[level.promptId];
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__guess_guess__["a" /* GuessPage */], { prompt: newLevel });
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__guess_guess__["a" /* GuessPage */], { prompt: newLevel, level: level });
         }
     };
     /**
@@ -56174,17 +56227,39 @@ var HomePage = (function () {
         });
         toast.present();
     };
+    HomePage.prototype.checkIfGameEnded = function () {
+        var isGameFinished = true;
+        var prompt = this.alertCtrl.create({
+            title: '🎉🎉🎉',
+            subTitle: 'Congratulations! You have completed every level!',
+            buttons: [{
+                    text: 'OK',
+                    handler: function () {
+                        return null;
+                    }
+                }],
+        });
+        this.levels.forEach(function (level) {
+            if (!level.completed) {
+                isGameFinished = false;
+            }
+        });
+        if (isGameFinished) {
+            this.smartAudio.play('fanfare');
+            this.gameFinished = true;
+            prompt.present();
+        }
+    };
     return HomePage;
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["l" /* Injectable */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/'<ion-header>\n    \n    \n</ion-header>\n<!-- Home -->\n<ion-content class="home">\n  <!-- Header -->\n  <header class=\'home-header\' primary-color>\n    <section class=\'home-header-topbar\'>\n      <p class="points-number">Coins: {{this.player.coins}}</p>\n      <!--<ion-icon class="points-icon" name="star"></ion-icon>-->\n    </section>\n    <section class=\'home-header-logo\'>\n      <img class="logo" src="./assets/img/guessoramatitle.png">\n    </section>\n  </header>\n  <!-- Level cards -->\n  <ion-list class=\'level-card-container\'>\n      <ion-card class=\'level-card\'\n        *ngFor=\'let level of levels\'\n        [ngClass]="(level.completed) ? \'disabled\' : \'\'"\n        (click)=\'levelTapped($event, level)\'\n      >\n        <ion-card-content class=\'level-card-content\'>\n          {{ level.title }}\n        </ion-card-content>\n      </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/'<ion-header>\n    \n    \n</ion-header>\n<!-- Home -->\n<ion-content class="home">\n  <!-- Header -->\n  <header class=\'home-header\' primary-color>\n    <section class=\'home-header-topbar\'>\n      <section>\n        <p (click)=\'onNameTap()\'>\n          {{ this.player.name }}\n        </p>\n      </section>\n      <section>\n        <p class="points-number">\n          Coins: {{ this.player.coins }}\n          <ion-icon name=\'ios-radio-button-on\'></ion-icon>\n        </p>\n      </section>\n    </section>\n    <section class=\'home-header-logo\'>\n      <img class="logo" src="./assets/img/guessoramatitle.png">\n    </section>\n  </header>\n  <!-- Level cards -->\n  <ion-list class=\'level-card-container\'>\n      <ion-card class=\'level-card\'\n        *ngFor=\'let level of levels\'\n        [ngClass]=\'{ disabled: level.completed }\'\n        (click)=\'levelTapped($event, level)\'\n      >\n        <ion-card-content class=\'level-card-content\'>\n          {{ level.title }}\n        </ion-card-content>\n      </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_smart_audio__["a" /* SmartAudio */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_smart_audio__["a" /* SmartAudio */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */], __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */], __WEBPACK_IMPORTED_MODULE_5__providers_smart_audio__["a" /* SmartAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
 ], HomePage);
 
-var _a, _b, _c, _d, _e;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -58478,7 +58553,9 @@ function instanceAvailability(pluginObj, methodName) {
     return pluginObj._objectInstance && (!methodName || typeof pluginObj._objectInstance[methodName] !== 'undefined');
 }
 function setIndex(args, opts, resolve, reject) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     // ignore resolve and reject in case sync
     if (opts.sync) {
         return args;
@@ -58542,7 +58619,9 @@ function setIndex(args, opts, resolve, reject) {
     return args;
 }
 function callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     // Try to figure out where the success/error callbacks need to be bound
     // to our promise resolve/reject handlers.
     args = setIndex(args, opts, resolve, reject);
@@ -58556,7 +58635,9 @@ function callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject) {
     }
 }
 function wrapPromise(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     var pluginResult, rej;
     var p = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* getPromise */])(function (resolve, reject) {
         pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject);
@@ -58572,7 +58653,9 @@ function wrapPromise(pluginObj, methodName, args, opts) {
     return p;
 }
 function wrapOtherPromise(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* getPromise */])(function (resolve, reject) {
         var pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts);
         if (pluginResult) {
@@ -58589,7 +58672,9 @@ function wrapOtherPromise(pluginObj, methodName, args, opts) {
     });
 }
 function wrapObservable(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
         var pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, observer.next.bind(observer), observer.error.bind(observer));
         if (pluginResult && pluginResult.error) {
@@ -58613,7 +58698,9 @@ function wrapObservable(pluginObj, methodName, args, opts) {
     });
 }
 function callInstance(pluginObj, methodName, args, opts, resolve, reject) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     args = setIndex(args, opts, resolve, reject);
     if (instanceAvailability(pluginObj, methodName)) {
         return pluginObj._objectInstance[methodName].apply(pluginObj._objectInstance, args);
@@ -58627,7 +58714,9 @@ function callInstance(pluginObj, methodName, args, opts, resolve, reject) {
  * @returns {Observable}
  */
 function wrapEventObservable(event, element) {
-    if (element === void 0) { element = window; }
+    if (element === void 0) {
+        element = window;
+    }
     return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].fromEvent(element, event);
 }
 /**
@@ -58639,7 +58728,9 @@ function wrapEventObservable(event, element) {
  * @private
  */
 function overrideFunction(pluginObj, methodName, args, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
         var availabilityCheck = checkAvailability(pluginObj, methodName);
         if (availabilityCheck === true) {
@@ -58657,7 +58748,9 @@ function overrideFunction(pluginObj, methodName, args, opts) {
  * @private
  */
 var wrap = function (pluginObj, methodName, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -58685,7 +58778,9 @@ var wrap = function (pluginObj, methodName, opts) {
  * @private
  */
 function wrapInstance(pluginObj, methodName, opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -58737,6 +58832,7 @@ function wrapInstance(pluginObj, methodName, opts) {
         }
     };
 }
+//# sourceMappingURL=plugin.js.map 
 //# sourceMappingURL=plugin.js.map
 
 /***/ }),
@@ -58750,7 +58846,9 @@ function wrapInstance(pluginObj, methodName, opts) {
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        function (d, b) { for (var p in b)
+            if (b.hasOwnProperty(p))
+                d[p] = b[p]; };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -58759,12 +58857,17 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+        r = Reflect.decorate(decorators, target, key, desc);
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i])
+                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+        return Reflect.metadata(k, v);
 };
 
 
@@ -58912,6 +59015,7 @@ NativeAudio = __decorate([
     })
 ], NativeAudio);
 
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -58924,12 +59028,17 @@ NativeAudio = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashScreen; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+        r = Reflect.decorate(decorators, target, key, desc);
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i])
+                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+        return Reflect.metadata(k, v);
 };
 
 
@@ -58968,17 +59077,17 @@ var SplashScreen = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], SplashScreen.prototype, "show", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], SplashScreen.prototype, "hide", null);
     SplashScreen = __decorate([
@@ -58987,11 +59096,12 @@ var SplashScreen = (function () {
             plugin: 'cordova-plugin-splashscreen',
             pluginRef: 'navigator.splashscreen',
             repo: 'https://github.com/apache/cordova-plugin-splashscreen'
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SplashScreen);
     return SplashScreen;
 }());
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -59004,12 +59114,17 @@ var SplashScreen = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatusBar; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+        r = Reflect.decorate(decorators, target, key, desc);
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i])
+                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+        return Reflect.metadata(k, v);
 };
 
 
@@ -59103,77 +59218,77 @@ var StatusBar = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Boolean]), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [Boolean]),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "overlaysWebView", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleDefault", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleLightContent", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleBlackTranslucent", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "styleBlackOpaque", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [String]), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [String]),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "backgroundColorByName", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [String]), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [String]),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "backgroundColorByHexString", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "hide", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["b" /* Cordova */])({
             sync: true
-        }), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        }),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], StatusBar.prototype, "show", null);
     __decorate([
-        __WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["d" /* CordovaProperty */], 
+        __WEBPACK_IMPORTED_MODULE_1__ionic_native_core__["d" /* CordovaProperty */],
         __metadata('design:type', Boolean)
     ], StatusBar.prototype, "isVisible", void 0);
     StatusBar = __decorate([
@@ -59183,11 +59298,12 @@ var StatusBar = (function () {
             pluginRef: 'StatusBar',
             repo: 'https://github.com/apache/cordova-plugin-statusbar',
             platforms: ['iOS', 'Android', 'Windows Phone 8', 'Windows 8', 'Windows 10']
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], StatusBar);
     return StatusBar;
 }());
+//# sourceMappingURL=index.js.map 
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -77074,27 +77190,24 @@ exports.tryCatch = tryCatch;
 /***/ (function(module, exports) {
 
 var g;
-
 // This works in non-strict mode
-g = (function() {
-	return this;
+g = (function () {
+    return this;
 })();
-
 try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
+    // This works if eval is allowed (see CSP)
+    g = g || Function("return this")() || (1, eval)("this");
 }
-
+catch (e) {
+    // This works if the window reference is available
+    if (typeof window === "object")
+        g = window;
+}
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
 // easier to handle this case. if(!global) { ...}
-
 module.exports = g;
-
+//# sourceMappingURL=global.js.map
 
 /***/ }),
 /* 200 */
@@ -77439,7 +77552,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/app/app.html"*/,
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/app/app.html"*/'<!--<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>-->\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/app/app.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */], __WEBPACK_IMPORTED_MODULE_5__providers_player__["a" /* Player */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
@@ -103565,6 +103678,7 @@ function checkReady() {
         }
     }, DEVICE_READY_TIMEOUT);
 }
+//# sourceMappingURL=bootstrap.js.map 
 //# sourceMappingURL=bootstrap.js.map
 
 /***/ }),
@@ -103595,7 +103709,9 @@ function checkReady() {
  * @private
  */
 function InstanceCheck(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (pluginObj, methodName, descriptor) {
         return {
             value: function () {
@@ -103624,7 +103740,9 @@ function InstanceCheck(opts) {
  * @private
  */
 function CordovaCheck(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (pluginObj, methodName, descriptor) {
         return {
             value: function () {
@@ -103708,7 +103826,9 @@ function Plugin(config) {
  * and the required plugin are installed.
  */
 function Cordova(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (target, methodName, descriptor) {
         return {
             value: function () {
@@ -103727,7 +103847,9 @@ function Cordova(opts) {
  * Wrap an instance method
  */
 function CordovaInstance(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (target, methodName) {
         return {
             value: function () {
@@ -103788,7 +103910,9 @@ function InstanceProperty(target, key) {
  * and the required plugin are installed.
  */
 function CordovaFunctionOverride(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     return function (target, methodName, descriptor) {
         return {
             value: function () {
@@ -103808,7 +103932,9 @@ function CordovaFunctionOverride(opts) {
  *
  */
 function CordovaFiniteObservable(opts) {
-    if (opts === void 0) { opts = {}; }
+    if (opts === void 0) {
+        opts = {};
+    }
     if (opts.observable === false) {
         throw new Error('CordovaFiniteObservable decorator can only be used on methods that returns observable. Please provide correct option.');
     }
@@ -103840,6 +103966,7 @@ function CordovaFiniteObservable(opts) {
         };
     };
 }
+//# sourceMappingURL=decorators.js.map 
 //# sourceMappingURL=decorators.js.map
 
 /***/ }),
@@ -103875,6 +104002,7 @@ var IonicNativePlugin = (function () {
     return IonicNativePlugin;
 }());
 
+//# sourceMappingURL=ionic-native-plugin.js.map 
 //# sourceMappingURL=ionic-native-plugin.js.map
 
 /***/ }),

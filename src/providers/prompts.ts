@@ -17,8 +17,6 @@ export class Prompts {
   currentPrompt: any = {};
 
   constructor(public http: Http) {
-    console.log('Hello Prompts Provider');
-
     this.promptObserver = null;
 
     // Create observer

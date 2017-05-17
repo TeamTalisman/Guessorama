@@ -12,12 +12,12 @@ export class GuessPage {
   prompt: {
     type: String,
     prompt: String,
-    responses: Array<{ points: Number, hint: String, response: String, partialResponse: String }>
+    completed: Boolean,
+    responses: Array<{ points: Number, hint: String, response: String, partialResponse: String, guessed: Boolean }>
   };
   textPrompt = false;
   imgPrompt = false;
   audioPrompt = false;
-  responses: Array<{ points: Number, hint: String, response: String, partialResponse: String, guessed: Boolean }>
   levelCompleted: Boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
@@ -29,22 +29,10 @@ export class GuessPage {
     // Get the prompt from the parameters passed from home
     this.prompt = navParams.get('prompt');
 
-    // make responses an empty array
-    this.responses = [];
-
     // This is for checking what content we display
     this.imgPrompt = (this.prompt.type === 'image');
     this.textPrompt = (this.prompt.type === 'text');
     this.audioPrompt = (this.prompt.type === 'audio');
-
-    // Loop through responses in the main object
-    this.prompt.responses.forEach((response) => {
-      // Create a new object and add a guessed property
-      const answer = Object.assign({}, response, { guessed: false });
-
-      // Push to responses
-      this.responses.push(answer);
-    });
   }
 
   /**
@@ -76,8 +64,12 @@ export class GuessPage {
         // Set input to empty again
         event.target.value = '';
 
+        // If already guessed skip the rest
+        if (this.prompt.responses[correctResponse].guessed)
+          return null;
+        
         // Set bool for class to true
-        this.responses[correctResponse].guessed = true;
+        this.prompt.responses[correctResponse].guessed = true;
 
         // Play audio
         this.smartAudio.play('correctPing');
@@ -108,13 +100,14 @@ export class GuessPage {
       }],
     };
 
-    this.responses.forEach((response) => {
+    this.prompt.responses.forEach((response) => {
       if (!response.guessed) {
         isLevelFinished = false;
       }
     });
 
     if (isLevelFinished) {
+      this.prompt.completed = true;
       this.presentAlert(alertProps.title, alertProps.description, alertProps.buttons);
     }
   }

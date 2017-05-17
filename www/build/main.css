@@ -54925,10 +54925,6 @@ page-guess .response-card {
   background: #FBBD9B;
 }
 
-page-guess .response-card .even {
-  background: green;
-}
-
 page-guess .response-card:not(.even):nth-of-type(4), page-guess .response-card:not(.even):last-of-type {
   -webkit-flex-basis: 50%;
   -ms-flex-preferred-size: 50%;
@@ -54937,11 +54933,16 @@ page-guess .response-card:not(.even):nth-of-type(4), page-guess .response-card:n
 
 @media only screen and (min-width: 760px) {
   page-guess .response-card {
+    -webkit-flex-basis: 16.66%;
+    -ms-flex-preferred-size: 16.66%;
+    flex-basis: 16.66%;
+  }
+  page-guess .response-card:not(.even) {
     -webkit-flex-basis: 20%;
     -ms-flex-preferred-size: 20%;
     flex-basis: 20%;
   }
-  page-guess .response-card:nth-of-type(4), page-guess .response-card:last-of-type {
+  page-guess .response-card:not(.even):nth-of-type(4), page-guess .response-card:not(.even):last-of-type {
     -webkit-flex-basis: 20%;
     -ms-flex-preferred-size: 20%;
     flex-basis: 20%;

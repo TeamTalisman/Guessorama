@@ -79,10 +79,6 @@ page-guess {
     color: map-get($colors, blue);
     background: map-get($colors, orange);
 
-    .even {
-      background: green;
-    }
-
     &:not(.even) {
       &:nth-of-type(4),
       &:last-of-type {
@@ -91,11 +87,14 @@ page-guess {
     }
 
     @include MQ(M) {
-      flex-basis: 20%;
+      flex-basis: 16.66%;
 
-      &:nth-of-type(4),
-      &:last-of-type {
+      &:not(.even) {
         flex-basis: 20%;
+        &:nth-of-type(4),
+        &:last-of-type {
+          flex-basis: 20%;
+        }
       }
     }
 

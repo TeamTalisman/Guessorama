@@ -4,9 +4,9 @@ import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { GuessPage } from '../guess/guess';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/Rx';
+import { Player } from '../../providers/player';
 import { Prompts } from '../../providers/prompts';
+import { SmartAudio } from '../../providers/smart-audio'; 
 
 @Injectable()
 @Component({
@@ -15,13 +15,17 @@ import { Prompts } from '../../providers/prompts';
 })
 export class HomePage {
   selectedLevel: any;
-  levels: Array<{ id: Number, title: string, promptId: Number, completed: Boolean }>
+  levels: Array<{ id: number, title: string, promptId: number, completed: boolean }>
 
-  constructor(public promptsService: Prompts, private http: Http, public navCtrl: NavController, public toastCtrl: ToastController) {
+  constructor(public promptsService: Prompts, public player: Player, public smartAudio: SmartAudio, public navCtrl: NavController, public toastCtrl: ToastController) {
+    smartAudio.preload('bloop', 'assets/audio/bloop.mp3');
+    smartAudio.preload('ambient', 'assets/audio/ambient.mp3');
+
     this.levels = [];
   }
 
   ionViewDidLoad() {
+    this.smartAudio.play('ambient');
     this.promptsService.loadData();
     this.promptsService.prompt.subscribe((prompts) => {
       prompts.forEach((prompt, index) => {
@@ -29,9 +33,17 @@ export class HomePage {
           id: index,
           title: 'Level ' + (index + 1),
           promptId: prompt.id,
-          completed: false,
+          completed: prompt.completed,
         });
       });
+    });
+  }
+
+  ionViewDidEnter() {
+    this.levels.forEach((level, index) => {
+      const promptIndex = level.promptId;
+      const completed = this.promptsService.prompts[promptIndex].completed;
+      level.completed = completed;
     });
   }
 
@@ -45,8 +57,8 @@ export class HomePage {
     if (level.completed) {
       this.presentToast('You have already completed that level', 3000, 'top', false);
     } else {
+      this.smartAudio.play('bloop');
       const newLevel = this.promptsService.prompts[level.promptId];
-      level.completed = true;
       this.navCtrl.push(GuessPage, { prompt: newLevel });
     }
   }

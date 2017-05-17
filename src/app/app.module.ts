@@ -13,6 +13,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SmartAudio } from '../providers/smart-audio';
 import { Prompts } from '../providers/prompts';
+import { Player } from '../providers/player';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { Prompts } from '../providers/prompts';
     SmartAudio,
     NativeAudio,
     Prompts,
+    Player,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

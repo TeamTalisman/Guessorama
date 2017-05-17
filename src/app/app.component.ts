@@ -3,12 +3,13 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Prompts } from '../providers/prompts';
+import { Player } from '../providers/player';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [Prompts]
+  providers: [Prompts, Player]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

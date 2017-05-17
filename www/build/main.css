@@ -54817,11 +54817,67 @@ ion-navbar.toolbar {
   }
 }
 
+@-webkit-keyframes timer {
+  0% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    background: #32db64;
+  }
+  33% {
+    background: #FCCF4D;
+  }
+  66% {
+    background: #f53d3d;
+  }
+  100% {
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+  }
+}
+
+@keyframes timer {
+  0% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    background: #32db64;
+  }
+  33% {
+    background: #FCCF4D;
+  }
+  66% {
+    background: #f53d3d;
+  }
+  100% {
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+  }
+}
+
 page-guess .guess {
   background-image: url("../assets/backgrounds/Sky_Stars.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+page-guess .progress-bar {
+  visibility: hidden;
+  background: none;
+  width: 100%;
+  height: 10px;
+  -webkit-animation: timer 25s;
+  animation: timer 25s;
+}
+
+page-guess .progress-bar.show {
+  visibility: visible;
+}
+
+page-guess .hint-text {
+  padding: 0 1em;
+  font-size: 1em;
+  text-align: center;
+  color: white;
 }
 
 page-guess .prompt-header {
@@ -54851,8 +54907,6 @@ page-guess .response-card-list {
   align-content: stretch;
   margin: 0;
   padding: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  background: grey;
 }
 
 page-guess .response-card {

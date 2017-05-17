@@ -1,8 +1,5 @@
 page-home {
   .home {
-    //background: map-get($colors, blue);
-    //background-image: url('../assets/backgrounds/Basic_Blue.jpg');
-    //background-image: url('../assets/backgrounds/Pink_Stars.jpg');
     background-image: url('../assets/backgrounds/Sky_Stars.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -22,6 +19,17 @@ page-home {
     padding: 1em;
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
+    color: map-get($colors, orange);
+
+    p {
+      display: flex;
+      justify-content: center;
+    }
+
+    ion-icon {
+      margin-left: 10px;
+    }
   }
 
   .home-header-logo { 
@@ -32,14 +40,6 @@ page-home {
     @include center(xy);
     color: white;
   }
-
- .points-icon{
-    color: gold;
- }
-
- .points-number{
-     color: gold;
- }
 
   // Levels
   .level-card-container {
@@ -52,7 +52,7 @@ page-home {
   .level-card {
     text-align: center;
     font-size: 2em;
-    color: map-get($colors, brown);;
+    color: map-get($colors, blue);;
     background: map-get($colors, orange);
     flex-basis: calc(50% - calc(#{$padding} * 3));
     margin-top: $padding;

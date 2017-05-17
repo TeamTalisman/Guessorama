@@ -37466,7 +37466,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var Player = (function () {
     function Player() {
-        this.coins = 0;
+        this.coins = 75;
         this.name = 'You';
     }
     Player.prototype.changeName = function (name) {
@@ -55885,7 +55885,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var GuessPage = (function () {
     function GuessPage(player, navCtrl, navParams, smartAudio, alertCtrl, toastCtrl) {
-        var _this = this;
         this.player = player;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -55895,22 +55894,29 @@ var GuessPage = (function () {
         this.textPrompt = false;
         this.imgPrompt = false;
         this.audioPrompt = false;
-        this.timerDuration = 25000;
-        // Preload audio assets
-        smartAudio.preload('timer', 'assets/audio/timer.mp3');
-        smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
-        smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
-        smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
+        this.timerDuration = 45000;
         // Get the prompt from the parameters passed from home
         this.prompt = navParams.get('prompt');
+        this.title = navParams.get('level').title;
+    }
+    GuessPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        // Preload audio assets
+        this.smartAudio.preload('timer', 'assets/audio/timer.mp3');
+        this.smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
+        this.smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
+        this.smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
+        this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
+        if (!this.prompt.viewed) {
+            this.timer = setTimeout(function () { _this.stopTimer(true); }, this.timerDuration);
+            this.timerRunning = true;
+        }
         // This is for checking what content we display
         this.imgPrompt = (this.prompt.type === 'image');
         this.textPrompt = (this.prompt.type === 'text');
         this.audioPrompt = (this.prompt.type === 'audio');
-        this.timer = setTimeout(function () { _this.stopTimer(true); }, this.timerDuration);
-        this.timerRunning = true;
-        this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
-    }
+        this.prompt.viewed = true;
+    };
     GuessPage.prototype.ionViewWillLeave = function () {
         this.stopTimer(false);
     };
@@ -56007,9 +56013,9 @@ var GuessPage = (function () {
         };
         var alertProps = {
             title: 'Purchase Hint',
-            description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a description of the answer. For 100 coins you can see the answer with missing letters.',
+            description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a descriptive blurb. For 100 coins you\'ll see parts of the answer.',
             buttons: [{
-                    text: 'Blurb 50 coins',
+                    text: 'Blurb: 50 coins',
                     handler: function () {
                         if (_this.player.coins > 50) {
                             _this.player.spendCoins(50);
@@ -56020,7 +56026,7 @@ var GuessPage = (function () {
                         }
                     }
                 }, {
-                    text: 'Partial word 100 coins',
+                    text: 'Partial Answer: 100 coins',
                     handler: function () {
                         if (_this.player.coins > 100) {
                             _this.player.spendCoins(100);
@@ -56029,6 +56035,11 @@ var GuessPage = (function () {
                         else {
                             _this.presentAlert(poorProps.title, poorProps.description, poorProps.buttons);
                         }
+                    }
+                }, {
+                    text: 'Cancel',
+                    handler: function () {
+                        return null;
                     }
                 }]
         };
@@ -56070,7 +56081,7 @@ var GuessPage = (function () {
 }());
 GuessPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-guess',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/'<!-- Header -->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name=\'menu\'></ion-icon>\n    </button>\n  </ion-navbar>\n</ion-header>\n<!-- Content -->\n<ion-content class="guess">\n  <ion-list class=\'response-card-list\'>\n    <ion-card\n      *ngFor=\'let response of prompt.responses; let i = index;\'\n      class=\'response-card\'\n      [ngClass]="(response.guessed) ? \'guessed\' : \'\' "\n      (click)=\'cardTapped($event, response)\'\n    >\n      <!-- If this response has not been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'!response.guessed\'>\n        <!-- Show the points the response will award -->\n        {{ response.points }}\n      </ion-card-content>\n      <!-- Else If this response has been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'response.guessed\'>\n        <!-- Show the actual response -->\n        {{ response.response }}\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n  <section class=\'progress-bar\'[ngClass]="(timerRunning) ? \'show\' : \'\' "></section>\n  <section class=\'hint-section\'>\n  <p class=\'hint-text\'>\n    {{ hint }}\n  </p>\n</section>\n  <article padding>\n    <header>\n      <ion-card>\n        <ion-card-header class=\'prompt-header\'>\n          <!-- If Text prompt show this -->\n          <h2 *ngIf=\'textPrompt\' class=\'prompt-header-text\'>\n            {{ prompt.prompt }}\n          </h2>\n          <!-- If image prompt show this -->\n          <img *ngIf=\'imgPrompt\' src="./assets/img/prompts/{{prompt.prompt}}" />\n        </ion-card-header>\n      </ion-card>\n    </header>\n    <section>\n      <ion-item>\n        <ion-label floating class=\'placeholder-label\'>\n          Enter your guesses...\n        </ion-label>\n        <ion-input type=\'text\' (keypress)=\'textEntered($event)\' clearInput></ion-input>\n      </ion-item>\n    </section>\n  </article>\n</ion-content>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/
+        selector: 'page-guess',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/'<!-- Header -->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name=\'menu\'></ion-icon>\n    </button>\n    <ion-title>{{ title }}</ion-title>\n  </ion-navbar>\n</ion-header>\n<!-- Content -->\n<ion-content class="guess">\n  <ion-list class=\'response-card-list\'>\n    <ion-card\n      *ngFor=\'let response of prompt.responses; let i = index;\'\n      class=\'response-card\'\n      [ngClass]="(response.guessed) ? \'guessed\' : \'\' "\n      (click)=\'cardTapped($event, response)\'\n    >\n      <!-- If this response has not been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'!response.guessed\'>\n        <!-- Show the points the response will award -->\n        {{ response.points }}\n      </ion-card-content>\n      <!-- Else If this response has been guessed -->\n      <ion-card-content class=\'response-text\' *ngIf=\'response.guessed\'>\n        <!-- Show the actual response -->\n        {{ response.response }}\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n  <section class=\'progress-bar\'[ngClass]="(timerRunning) ? \'show\' : \'\' "></section>\n  <section class=\'hint-section\'>\n  <p class=\'hint-text\'>\n    <em>{{ hint }}</em>\n  </p>\n</section>\n  <article padding>\n    <header>\n      <ion-card>\n        <ion-card-header class=\'prompt-header\'>\n          <!-- If Text prompt show this -->\n          <h2 *ngIf=\'textPrompt\' class=\'prompt-header-text\'>\n            {{ prompt.prompt }}\n          </h2>\n          <!-- If image prompt show this -->\n          <img *ngIf=\'imgPrompt\' src="./assets/img/prompts/{{prompt.prompt}}" />\n        </ion-card-header>\n      </ion-card>\n    </header>\n    <section>\n      <ion-item>\n        <ion-label floating class=\'placeholder-label\'>\n          Enter your guesses...\n        </ion-label>\n        <ion-input type=\'text\' (keypress)=\'textEntered($event)\' clearInput></ion-input>\n      </ion-item>\n    </section>\n  </article>\n</ion-content>'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/guess/guess.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_smart_audio__["a" /* SmartAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
 ], GuessPage);
@@ -56107,14 +56118,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = (function () {
-    function HomePage(promptsService, player, smartAudio, navCtrl, toastCtrl) {
+    function HomePage(promptsService, player, smartAudio, navCtrl, alertCtrl, toastCtrl) {
         this.promptsService = promptsService;
         this.player = player;
         this.smartAudio = smartAudio;
         this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
         smartAudio.preload('bloop', 'assets/audio/bloop.mp3');
         smartAudio.preload('ambient', 'assets/audio/ambient.mp3');
+        this.smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
         this.levels = [];
     }
     HomePage.prototype.ionViewDidLoad = function () {
@@ -56139,6 +56152,43 @@ var HomePage = (function () {
             var completed = _this.promptsService.prompts[promptIndex].completed;
             level.completed = completed;
         });
+        if (!this.gameFinished) {
+            this.checkIfGameEnded();
+        }
+    };
+    HomePage.prototype.onNameTap = function () {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: 'Change Name',
+            message: 'Enter your name',
+            inputs: [
+                {
+                    name: 'name',
+                    placeholder: 'Jane Doe'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: function (data) {
+                        return null;
+                    }
+                },
+                {
+                    text: 'Save',
+                    handler: function (data) {
+                        if (data.name.length > 0) {
+                            _this.presentToast('😎 Your name has been updated.', 3000, 'top', true);
+                            _this.player.changeName(data.name);
+                        }
+                        else {
+                            _this.presentToast('😅 To change your name you need to enter an actual name.', 3000, 'top', true);
+                        }
+                    }
+                }
+            ]
+        });
+        prompt.present();
     };
     /**
      * levelTapped - Get's a random prompt and sends it to the GuessPage as a param
@@ -56153,7 +56203,7 @@ var HomePage = (function () {
         else {
             this.smartAudio.play('bloop');
             var newLevel = this.promptsService.prompts[level.promptId];
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__guess_guess__["a" /* GuessPage */], { prompt: newLevel });
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__guess_guess__["a" /* GuessPage */], { prompt: newLevel, level: level });
         }
     };
     /**
@@ -56173,16 +56223,40 @@ var HomePage = (function () {
         });
         toast.present();
     };
+    HomePage.prototype.checkIfGameEnded = function () {
+        var isGameFinished = true;
+        var prompt = this.alertCtrl.create({
+            title: '🎉🎉🎉',
+            subTitle: 'Congratulations! You have completed every level!',
+            buttons: [{
+                    text: 'OK',
+                    handler: function () {
+                        return null;
+                    }
+                }],
+        });
+        this.levels.forEach(function (level) {
+            if (!level.completed) {
+                isGameFinished = false;
+            }
+        });
+        if (isGameFinished) {
+            this.smartAudio.play('fanfare');
+            this.gameFinished = true;
+            prompt.present();
+        }
+    };
     return HomePage;
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["l" /* Injectable */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/'<ion-header>\n    \n    \n</ion-header>\n<!-- Home -->\n<ion-content class="home">\n  <!-- Header -->\n  <header class=\'home-header\' primary-color>\n    <section class=\'home-header-topbar\'>\n      <p class="points-number">Coins: {{this.player.coins}}</p>\n      <!--<ion-icon class="points-icon" name="star"></ion-icon>-->\n    </section>\n    <section class=\'home-header-logo\'>\n      <img class="logo" src="./assets/img/guessoramatitle.png">\n    </section>\n  </header>\n  <!-- Level cards -->\n  <ion-list class=\'level-card-container\'>\n      <ion-card class=\'level-card\'\n        *ngFor=\'let level of levels\'\n        [ngClass]="(level.completed) ? \'disabled\' : \'\'"\n        (click)=\'levelTapped($event, level)\'\n      >\n        <ion-card-content class=\'level-card-content\'>\n          {{ level.title }}\n        </ion-card-content>\n      </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/'<ion-header>\n    \n    \n</ion-header>\n<!-- Home -->\n<ion-content class="home">\n  <!-- Header -->\n  <header class=\'home-header\' primary-color>\n    <section class=\'home-header-topbar\'>\n      <section>\n        <p (click)=\'onNameTap()\'>\n          {{ this.player.name }}\n        </p>\n      </section>\n      <section>\n        <p class="points-number">\n          Coins: {{ this.player.coins }}\n          <ion-icon name=\'ios-radio-button-on\'></ion-icon>\n        </p>\n      </section>\n    </section>\n    <section class=\'home-header-logo\'>\n      <img class="logo" src="./assets/img/guessoramatitle.png">\n    </section>\n  </header>\n  <!-- Level cards -->\n  <ion-list class=\'level-card-container\'>\n      <ion-card class=\'level-card\'\n        *ngFor=\'let level of levels\'\n        [ngClass]="(level.completed) ? \'disabled\' : \'\'"\n        (click)=\'levelTapped($event, level)\'\n      >\n        <ion-card-content class=\'level-card-content\'>\n          {{ level.title }}\n        </ion-card-content>\n      </ion-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/ericksauri/Code/Team Talisman/Guessorama/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */], __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */], __WEBPACK_IMPORTED_MODULE_5__providers_smart_audio__["a" /* SmartAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_prompts__["a" /* Prompts */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_player__["a" /* Player */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_smart_audio__["a" /* SmartAudio */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_smart_audio__["a" /* SmartAudio */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _f || Object])
 ], HomePage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=home.js.map
 
 /***/ }),

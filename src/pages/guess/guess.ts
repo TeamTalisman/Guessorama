@@ -11,39 +11,46 @@ import { Player } from '../../providers/player';
 export class GuessPage {
   // GuessPage fields
   prompt: {
-    type: String,
-    prompt: String,
-    completed: Boolean,
-    responses: Array<{ points: Number, hint: String, response: String, partialResponse: String, guessed: Boolean }>
+    type: string,
+    prompt: string,
+    completed: boolean,
+    viewed: boolean,
+    responses: Array<{ points: number, hint: string, response: string, partialResponse: string, guessed: boolean }>
   };
+  title: string;
   textPrompt = false;
   imgPrompt = false;
   audioPrompt = false;
   levelCompleted: Boolean;
-  timerDuration = 25000;
+  timerDuration = 45000;
   timer: any;
   timerRunning: boolean;
   hint: string;
 
-  constructor(public player: Player, public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {
-    // Preload audio assets
-    smartAudio.preload('timer', 'assets/audio/timer.mp3');
-    smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
-    smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
-    smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
-    
+  constructor(public player: Player, public navCtrl: NavController, public navParams: NavParams, public smartAudio: SmartAudio, public alertCtrl: AlertController, public toastCtrl: ToastController) {    
     // Get the prompt from the parameters passed from home
     this.prompt = navParams.get('prompt');
+    this.title = navParams.get('level').title;
+  }
 
+  ionViewDidLoad() {
+    // Preload audio assets
+    this.smartAudio.preload('timer', 'assets/audio/timer.mp3');
+    this.smartAudio.preload('fanfare', 'assets/audio/fanfare.mp3');
+    this.smartAudio.preload('correctPing', 'assets/audio/correct.mp3');
+    this.smartAudio.preload('wrongPing', 'assets/audio/incorrect.wav');
+    this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
+
+    if (!this.prompt.viewed) {
+      this.timer = setTimeout(() => { this.stopTimer(true); }, this.timerDuration);
+      this.timerRunning = true;
+    }
+  
     // This is for checking what content we display
     this.imgPrompt = (this.prompt.type === 'image');
     this.textPrompt = (this.prompt.type === 'text');
     this.audioPrompt = (this.prompt.type === 'audio');
-
-    this.timer = setTimeout(() => { this.stopTimer(true); }, this.timerDuration);
-    this.timerRunning = true;
-
-    this.hint = 'Can\'t guess one of the responses? Tap on a response box to purchase a Hint.';
+    this.prompt.viewed = true;
   }
 
   ionViewWillLeave() {
@@ -53,7 +60,6 @@ export class GuessPage {
   stopTimer(showToast) {
     this.timerRunning = false;
     clearTimeout(this.timer);
-
     if (showToast) {
       this.presentToast('Stuck? Tap on a guess box to get a hint!', 5000, 'bottom', true); 
     }
@@ -156,9 +162,9 @@ export class GuessPage {
 
     const alertProps = {
       title: 'Purchase Hint',
-      description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a description of the answer. For 100 coins you can see the answer with missing letters.',
+      description: 'If you need help guessing this answer you can get a hint. For 50 coins you can get a descriptive blurb. For 100 coins you\'ll see parts of the answer.',
       buttons: [{
-        text: 'Blurb 50 coins',
+        text: 'Blurb: 50 coins',
         handler: () => {
           if (this.player.coins > 50) {
             this.player.spendCoins(50);
@@ -168,7 +174,7 @@ export class GuessPage {
           }
         }
       }, {
-        text: 'Partial word 100 coins',
+        text: 'Partial Answer: 100 coins',
         handler: () => {
           if (this.player.coins > 100) {
             this.player.spendCoins(100);
@@ -176,6 +182,11 @@ export class GuessPage {
           } else {
             this.presentAlert(poorProps.title, poorProps.description, poorProps.buttons);
           }
+        }
+      }, {
+        text: 'Cancel',
+        handler: () => {
+          return null;
         }
       }]
     };

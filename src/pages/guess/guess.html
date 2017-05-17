@@ -4,6 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name='menu'></ion-icon>
     </button>
+    <ion-title>{{ title }}</ion-title>
   </ion-navbar>
 </ion-header>
 <!-- Content -->
@@ -30,7 +31,7 @@
   <section class='progress-bar'[ngClass]="(timerRunning) ? 'show' : '' "></section>
   <section class='hint-section'>
   <p class='hint-text'>
-    {{ hint }}
+    <em>{{ hint }}</em>
   </p>
 </section>
   <article padding>

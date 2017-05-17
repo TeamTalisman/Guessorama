@@ -2,14 +2,14 @@ page-guess {
   @keyframes timer {
     0% {
       transform: scaleX(1);
-      background: map-get($colors, secondary);
+      background: map-get($colors, green);
     }
     33% {
       background: map-get($colors, yellow);
 
     }
     66% {
-      background: map-get($colors, danger);
+      background: map-get($colors, red);
     }
     100% {
       transform: scaleX(0);
@@ -53,7 +53,7 @@ page-guess {
     font-family: Pseudonumb;
     text-transform: uppercase;
     font-size: 1.20em;
-    color: map-get($colors, brown);;
+    color: map-get($colors, blue);;
    }
 
   .response-card-list {
@@ -76,7 +76,7 @@ page-guess {
     flex-basis: 33.3%;
     font-family: Pseudonumb;
     text-transform: uppercase;
-    color: map-get($colors, brown);
+    color: map-get($colors, blue);
     background: map-get($colors, orange);
     
     &:nth-of-type(4),
@@ -95,7 +95,6 @@ page-guess {
 
     &.guessed {
       background: map-get($colors, green);
-      color:  map-get($colors, light);
     }
   }
 
